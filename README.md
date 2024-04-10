@@ -16,3 +16,10 @@ Paso 3
 Paso 4
 - Correr el proyecto
     - pnpm run dev
+
+## Documentacion de interes
+
+- Flowbite
+	- https://flowbite.com/docs/getting-started/introduction/
+- Tailwind CSS
+	- https://tailwindcss.com/
