@@ -32,9 +32,13 @@
 		const confettiSettings = {
 			target: confettiElement,
 			start_from_edge: true,
+			respawn: false,
+			max: 100,
+			clock: 80
 		};
 		const confetti = new ConfettiGenerator(confettiSettings);
 		confetti.render();
+		setInterval(() => confetti.clear(), 10000);
 	}
 
 	console.log('Pop 🎉!');

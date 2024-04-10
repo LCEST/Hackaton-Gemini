@@ -23,7 +23,6 @@ export default defineConfig({
 	},
 
 	integrations: [
-		//
 		sitemap(),
 		tailwind(),
 	],
