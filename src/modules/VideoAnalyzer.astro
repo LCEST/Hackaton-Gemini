@@ -1,0 +1,349 @@
+---
+import Confettis from '../components/ConfettiLauncher.astro';
+import { asset } from '../lib/data';
+---
+
+<div class="px-4 pt-6">
+	<div class="grid gap-4 xl:grid-cols-3">
+		<!-- Video -->
+		<div
+			class="p-4 sm:p-6 xl:col-span-2 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
+		>
+			<div>Here lies a video</div>
+		</div>
+		<!-- Observations -->
+		<div
+			class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800"
+		>
+			<h3
+				class="flex items-center mb-4 text-lg font-semibold text-gray-900 dark:text-white"
+			>
+				Observations
+				<button
+					data-popover-target="popover-description"
+					data-popover-placement="bottom-end"
+					type="button"
+					><svg
+						class="w-4 h-4 ml-2 text-gray-400 hover:text-gray-500"
+						aria-hidden="true"
+						fill="currentColor"
+						viewBox="0 0 20 20"
+						xmlns="http://www.w3.org/2000/svg"
+						><path
+							fill-rule="evenodd"
+							d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+							clip-rule="evenodd"></path></svg
+					><span class="sr-only">Show information</span></button
+				>
+			</h3>
+			<div
+				data-popover
+				id="popover-description"
+				role="tooltip"
+				class="absolute z-10 invisible inline-block text-sm font-light text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400"
+			>
+				<div class="p-3 space-y-2">
+					<h3 class="font-semibold text-gray-900 dark:text-white">
+						Gemini AI
+					</h3>
+					<p>
+						Remember, all of the observations are made using Gemini AI
+					</p>
+					<a
+						href="#"
+						class="flex items-center font-medium text-primary-600 dark:text-primary-500 dark:hover:text-primary-600 hover:text-primary-700"
+						>Read more <svg
+							class="w-4 h-4 ml-1"
+							aria-hidden="true"
+							fill="currentColor"
+							viewBox="0 0 20 20"
+							xmlns="http://www.w3.org/2000/svg"
+							><path
+								fill-rule="evenodd"
+								d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+								clip-rule="evenodd"></path></svg
+						></a
+					>
+				</div>
+				<div data-popper-arrow></div>
+			</div>
+			<div class="sm:hidden">
+				<label for="tabs" class="sr-only">Select tab</label>
+				<select
+					id="tabs"
+					class="bg-gray-50 border-0 border-b border-gray-200 text-gray-900 text-sm rounded-t-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+				>
+					<option>Positive</option>
+					<option>Negative</option>
+				</select>
+			</div>
+			<ul
+				class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg sm:flex dark:divide-gray-600 dark:text-gray-400"
+				id="fullWidthTab"
+				data-tabs-toggle="#fullWidthTabContent"
+				role="tablist"
+			>
+				<li class="w-full">
+					<button
+						id="faq-tab"
+						data-tabs-target="#faq"
+						type="button"
+						role="tab"
+						aria-controls="faq"
+						aria-selected="true"
+						class="inline-block w-full p-4 rounded-tl-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600"
+						>Positive</button
+					>
+				</li>
+				<li class="w-full">
+					<button
+						id="about-tab"
+						data-tabs-target="#about"
+						type="button"
+						role="tab"
+						aria-controls="about"
+						aria-selected="false"
+						class="inline-block w-full p-4 rounded-tr-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600"
+						>Negative</button
+					>
+				</li>
+			</ul>
+			<div
+				id="fullWidthTabContent"
+				class="border-t border-gray-200 dark:border-gray-600"
+			>
+				<div
+					class="hidden pt-4"
+					id="faq"
+					role="tabpanel"
+					aria-labelledby="faq-tab"
+				>
+					<ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+						<li class="py-3">
+							<div class="flex justify-between">
+								<div class="flex items-center min-w-0">
+									<div>
+										<p
+											class="font-medium text-gray-900 truncate dark:text-white"
+										>
+											Good stability
+										</p>
+									</div>
+								</div>
+								<div
+									class="text-base font-semibold text-gray-900 dark:text-white"
+								>
+									00:00 - 00:05
+								</div>
+							</div>
+							<p class="flex-1 text-sm text-gray-500">
+								The starting position of the bar seems correct, resting on the top of
+								the chest and shoulders, with the elbows elevated.
+							</p>
+						</li>
+						<li class="py-3">
+							<div class="flex justify-between">
+								<div class="flex items-center min-w-0">
+									<div>
+										<p
+											class="font-medium text-gray-900 truncate dark:text-white"
+										>
+											Good stability
+										</p>
+									</div>
+								</div>
+								<div
+									class="text-base font-semibold text-gray-900 dark:text-white"
+								>
+									00:00 - 00:05
+								</div>
+							</div>
+							<p class="flex-1 text-sm text-gray-500">
+								The starting position of the bar seems correct, resting on the top of
+								the chest and shoulders, with the elbows elevated.
+							</p>
+						</li>
+						<li class="py-3">
+							<div class="flex justify-between">
+								<div class="flex items-center min-w-0">
+									<div>
+										<p
+											class="font-medium text-gray-900 truncate dark:text-white"
+										>
+											Good stability
+										</p>
+									</div>
+								</div>
+								<div
+									class="text-base font-semibold text-gray-900 dark:text-white"
+								>
+									00:00 - 00:05
+								</div>
+							</div>
+							<p class="flex-1 text-sm text-gray-500">
+								The starting position of the bar seems correct, resting on the top of
+								the chest and shoulders, with the elbows elevated.
+							</p>
+						</li>
+					</ul>
+				</div>
+				<div
+					class="hidden pt-4"
+					id="about"
+					role="tabpanel"
+					aria-labelledby="about-tab"
+				>
+					<ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+						<li class="py-3 sm:py-4">
+							<div class="flex items-center space-x-4">
+								<div class="flex-shrink-0">
+									<img
+										class="w-8 h-8 rounded-full"
+										src={asset('images/users/neil-sims.png')}
+										alt="Neil image"
+									/>
+								</div>
+								<div class="flex-1 min-w-0">
+									<p class="font-medium text-gray-900 truncate dark:text-white">
+										Neil Sims
+									</p>
+									<p class="text-sm text-gray-500 truncate dark:text-gray-400">
+										email@flowbite.com
+									</p>
+								</div>
+								<div
+									class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+								>
+									$3320
+								</div>
+							</div>
+						</li>
+						<li class="py-3 sm:py-4">
+							<div class="flex items-center space-x-4">
+								<div class="flex-shrink-0">
+									<img
+										class="w-8 h-8 rounded-full"
+										src={asset('images/users/bonnie-green.png')}
+										alt="Neil image"
+									/>
+								</div>
+								<div class="flex-1 min-w-0">
+									<p class="font-medium text-gray-900 truncate dark:text-white">
+										Bonnie Green
+									</p>
+									<p class="text-sm text-gray-500 truncate dark:text-gray-400">
+										email@flowbite.com
+									</p>
+								</div>
+								<div
+									class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+								>
+									$2467
+								</div>
+							</div>
+						</li>
+						<li class="py-3 sm:py-4">
+							<div class="flex items-center space-x-4">
+								<div class="flex-shrink-0">
+									<img
+										class="w-8 h-8 rounded-full"
+										src={asset('images/users/michael-gough.png')}
+										alt="Neil image"
+									/>
+								</div>
+								<div class="flex-1 min-w-0">
+									<p class="font-medium text-gray-900 truncate dark:text-white">
+										Michael Gough
+									</p>
+									<p class="text-sm text-gray-500 truncate dark:text-gray-400">
+										email@flowbite.com
+									</p>
+								</div>
+								<div
+									class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+								>
+									$2235
+								</div>
+							</div>
+						</li>
+						<li class="py-3 sm:py-4">
+							<div class="flex items-center space-x-4">
+								<div class="flex-shrink-0">
+									<img
+										class="w-8 h-8 rounded-full"
+										src={asset('images/users/thomas-lean.png')}
+										alt="Neil image"
+									/>
+								</div>
+								<div class="flex-1 min-w-0">
+									<p class="font-medium text-gray-900 truncate dark:text-white">
+										Thomes Lean
+									</p>
+									<p class="text-sm text-gray-500 truncate dark:text-gray-400">
+										email@flowbite.com
+									</p>
+								</div>
+								<div
+									class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+								>
+									$1842
+								</div>
+							</div>
+						</li>
+						<li class="py-3 sm:py-4">
+							<div class="flex items-center space-x-4">
+								<div class="flex-shrink-0">
+									<img
+										class="w-8 h-8 rounded-full"
+										src={asset('images/users/lana-byrd.png')}
+										alt="Neil image"
+									/>
+								</div>
+								<div class="flex-1 min-w-0">
+									<p class="font-medium text-gray-900 truncate dark:text-white">
+										Lana Byrd
+									</p>
+									<p class="text-sm text-gray-500 truncate dark:text-gray-400">
+										email@flowbite.com
+									</p>
+								</div>
+								<div
+									class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+								>
+									$1044
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div
+				class="flex items-center justify-between pt-3 mt-5 border-t border-gray-200 sm:pt-6 dark:border-gray-700"
+			>
+				<p class="ms-2 font-medium text-gray-900 dark:text-white">Final score</p>
+				<div class="flex items-center gap-2">
+					<p
+						class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-blue-200 dark:text-blue-800"
+					>
+						7/10
+					</p>
+					<p class="ms-2 font-medium text-gray-900 dark:text-white">
+						Great
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- Feedback -->
+		<div
+			class="p-4 sm:p-6 xl:col-span-3 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
+		>
+			<h3
+				class="flex items-center mb-4 text-xl font-semibold text-gray-900 dark:text-white"
+			>
+				Coach Feedback
+			</h3>
+			<p class="text-gray-900 dark:text-white">
+				This is a placeholder for all the content that's gonna be here
+			</p>
+	</div>
+</div>
