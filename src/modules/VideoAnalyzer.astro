@@ -7,13 +7,20 @@ import { asset } from '../lib/data';
 	<div class="grid gap-4 xl:grid-cols-3">
 		<!-- Video -->
 		<div
-			class="p-4 sm:p-6 xl:col-span-2 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
+			class="p-4 sm:p-6 md:col-span-2 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
 		>
-			<div>Here lies a video</div>
+			<mux-player
+				stream-type="on-demand"
+				playback-id="EcHgOK9coz5K4rjSwOkoE7Y7O01201YMIC200RI6lNxnhs"
+				metadata-video-title="Analyzed video"
+				metadata-viewer-user-id="user-id-007"
+				title="Uploaded video"
+				loading="viewport"
+			></mux-player>
 		</div>
 		<!-- Observations -->
 		<div
-			class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800"
+			class="flex-col p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800"
 		>
 			<h3
 				class="flex items-center mb-4 text-lg font-semibold text-gray-900 dark:text-white"
@@ -194,133 +201,34 @@ import { asset } from '../lib/data';
 					aria-labelledby="about-tab"
 				>
 					<ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-						<li class="py-3 sm:py-4">
-							<div class="flex items-center space-x-4">
-								<div class="flex-shrink-0">
-									<img
-										class="w-8 h-8 rounded-full"
-										src={asset('images/users/neil-sims.png')}
-										alt="Neil image"
-									/>
-								</div>
-								<div class="flex-1 min-w-0">
-									<p class="font-medium text-gray-900 truncate dark:text-white">
-										Neil Sims
-									</p>
-									<p class="text-sm text-gray-500 truncate dark:text-gray-400">
-										email@flowbite.com
-									</p>
+						<li class="py-3">
+							<div class="flex justify-between">
+								<div class="flex items-center min-w-0">
+									<div>
+										<p
+											class="font-medium text-gray-900 truncate dark:text-white"
+										>
+											Bad form
+										</p>
+									</div>
 								</div>
 								<div
-									class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+									class="text-base font-semibold text-gray-900 dark:text-white"
 								>
-									$3320
+									00:00 - 00:05
 								</div>
 							</div>
-						</li>
-						<li class="py-3 sm:py-4">
-							<div class="flex items-center space-x-4">
-								<div class="flex-shrink-0">
-									<img
-										class="w-8 h-8 rounded-full"
-										src={asset('images/users/bonnie-green.png')}
-										alt="Neil image"
-									/>
-								</div>
-								<div class="flex-1 min-w-0">
-									<p class="font-medium text-gray-900 truncate dark:text-white">
-										Bonnie Green
-									</p>
-									<p class="text-sm text-gray-500 truncate dark:text-gray-400">
-										email@flowbite.com
-									</p>
-								</div>
-								<div
-									class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
-								>
-									$2467
-								</div>
-							</div>
-						</li>
-						<li class="py-3 sm:py-4">
-							<div class="flex items-center space-x-4">
-								<div class="flex-shrink-0">
-									<img
-										class="w-8 h-8 rounded-full"
-										src={asset('images/users/michael-gough.png')}
-										alt="Neil image"
-									/>
-								</div>
-								<div class="flex-1 min-w-0">
-									<p class="font-medium text-gray-900 truncate dark:text-white">
-										Michael Gough
-									</p>
-									<p class="text-sm text-gray-500 truncate dark:text-gray-400">
-										email@flowbite.com
-									</p>
-								</div>
-								<div
-									class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
-								>
-									$2235
-								</div>
-							</div>
-						</li>
-						<li class="py-3 sm:py-4">
-							<div class="flex items-center space-x-4">
-								<div class="flex-shrink-0">
-									<img
-										class="w-8 h-8 rounded-full"
-										src={asset('images/users/thomas-lean.png')}
-										alt="Neil image"
-									/>
-								</div>
-								<div class="flex-1 min-w-0">
-									<p class="font-medium text-gray-900 truncate dark:text-white">
-										Thomes Lean
-									</p>
-									<p class="text-sm text-gray-500 truncate dark:text-gray-400">
-										email@flowbite.com
-									</p>
-								</div>
-								<div
-									class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
-								>
-									$1842
-								</div>
-							</div>
-						</li>
-						<li class="py-3 sm:py-4">
-							<div class="flex items-center space-x-4">
-								<div class="flex-shrink-0">
-									<img
-										class="w-8 h-8 rounded-full"
-										src={asset('images/users/lana-byrd.png')}
-										alt="Neil image"
-									/>
-								</div>
-								<div class="flex-1 min-w-0">
-									<p class="font-medium text-gray-900 truncate dark:text-white">
-										Lana Byrd
-									</p>
-									<p class="text-sm text-gray-500 truncate dark:text-gray-400">
-										email@flowbite.com
-									</p>
-								</div>
-								<div
-									class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
-								>
-									$1044
-								</div>
-							</div>
+							<p class="flex-1 text-sm text-gray-500">
+								The form looks compromised for lack of strength
+							</p>
 						</li>
 					</ul>
 				</div>
 			</div>
 			<div
-				class="flex items-center justify-between pt-3 mt-5 border-t border-gray-200 sm:pt-6 dark:border-gray-700"
+				class="flex justify-between items-center pt-3 border-t border-gray-200 sm:pt-6 dark:border-gray-700"
 			>
-				<p class="ms-2 font-medium text-gray-900 dark:text-white">Final score</p>
+				<p class="font-medium text-gray-900 dark:text-white">Final score</p>
 				<div class="flex items-center gap-2">
 					<p
 						class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-blue-200 dark:text-blue-800"
@@ -347,3 +255,11 @@ import { asset } from '../lib/data';
 			</p>
 	</div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
+
+<style>
+	mux-player {
+		aspect-ratio: 16/9;
+	}
+</style>
