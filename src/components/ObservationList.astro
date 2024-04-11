@@ -1,0 +1,142 @@
+---
+import Observation from "./Observation.astro";
+
+export interface ObservationData {
+  id: string;
+  title: string;
+  timeStart: string;
+  timeEnd: string;
+  comment: string;
+}
+
+const POSITIVE_OBS: ObservationData[] = [
+  {
+    id: "1",
+    title: "Good stability",
+    timeStart: "00:00",
+    timeEnd: "00:05",
+    comment: "The starting position of the bar seems correct, resting on the top of the chest and shoulders, with the elbows elevated."
+  },
+  {
+    id: "2",
+    title: "Great form",
+    timeStart: "00:05",
+    timeEnd: "00:10",
+    comment: "Incididunt ea ex aute aliquip reprehenderit dolore elit. Non cupidatat eiusmod fugiat commodo cillum dolor magna consequat."
+  },
+  {
+    id: "3",
+    title: "Nice activation",
+    timeStart: "00:10",
+    timeEnd: "00:15",
+    comment: "Aliquip ut officia nisi minim anim culpa culpa nulla laboris reprehenderit ex."
+  }
+]
+const NEGATIVE_OBS: ObservationData[] = [
+  {
+    id: "4",
+    title: "Bad form",
+    timeStart: "00:15",
+    timeEnd: "00:20",
+    comment: "Est ex Lorem exercitation culpa sit sunt adipisicing velit excepteur laboris officia sit labore sint."
+  },
+  {
+    id: "5",
+    title: "Terrible breathing",
+    timeStart: "00:05",
+    timeEnd: "00:10",
+    comment: "Cillum aliqua est in ea et quis adipisicing exercitation."
+  },
+  {
+    id: "6",
+    title: "Not activating completely",
+    timeStart: "00:05",
+    timeEnd: "00:10",
+    comment: "Minim et sunt deserunt duis irure. Duis magna nostrud sint aliquip pariatur amet ea pariatur irure mollit est duis."
+  }
+]
+---
+
+<!-- TABS FOR MOBILE -->
+<div class="sm:hidden">
+	<label for="tabs" class="sr-only">Select tab</label>
+	<select
+		id="tabs"
+		class="bg-gray-50 border-0 border-b border-gray-200 text-gray-900 text-sm rounded-t-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+	>
+		<option>Positive</option>
+		<option>Negative</option>
+	</select>
+</div>
+
+<!-- TABS FOR DESKTOP -->
+<ul
+  class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg sm:flex dark:divide-gray-600 dark:text-gray-400"
+  id="fullWidthTab"
+  data-tabs-toggle="#fullWidthTabContent"
+  role="tablist"
+>
+  <li class="w-full">
+    <button
+      id="positive-tab"
+      data-tabs-target="#positive"
+      type="button"
+      role="tab"
+      aria-controls="positive"
+      aria-selected="true"
+      class="inline-block w-full p-4 rounded-tl-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600"
+      >Positive</button
+    >
+  </li>
+  <li class="w-full">
+    <button
+      id="negative-tab"
+      data-tabs-target="#negative"
+      type="button"
+      role="tab"
+      aria-controls="negative"
+      aria-selected="false"
+      class="inline-block w-full p-4 rounded-tr-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600"
+      >Negative</button
+    >
+  </li>
+</ul>
+
+<!-- TAB CONTENT -->
+<div
+  id="fullWidthTabContent"
+  class="border-t border-gray-200 dark:border-gray-600"
+>
+<!-- POSITIVE TAB CONTENT -->
+  <div
+    class="hidden pt-4"
+    id="positive"
+    role="tabpanel"
+    aria-labelledby="positive-tab"
+  >
+    <ul
+      class="flex-col hidden text-md font-medium text-gray-500 divide-y divide-gray-200 rounded-lg sm:flex dark:divide-gray-600 dark:text-gray-400"
+      id="fullWidthTab"
+      data-tabs-toggle="#fullWidthTabContent"
+      role="tablist"
+    >
+      {POSITIVE_OBS.map((obs: ObservationData) => <Observation {...obs}/>)}
+    </ul> 
+  </div>
+<!-- NEGATIVE TAB CONTENT -->
+  <div
+    class="hidden pt-4"
+    id="negative"
+    role="tabpanel"
+    aria-labelledby="negative-tab"
+  >
+    <ul
+      class="flex-col hidden text-md font-medium text-gray-500 divide-y divide-gray-200 rounded-lg sm:flex dark:divide-gray-600 dark:text-gray-400"
+      id="fullWidthTab"
+      data-tabs-toggle="#fullWidthTabContent"
+      role="tablist"
+    >
+      {NEGATIVE_OBS.map((obs: ObservationData) => <Observation {...obs}/>)}
+    </ul> 
+  </div>
+</div>

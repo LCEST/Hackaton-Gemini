@@ -1,6 +1,5 @@
 ---
-import Confettis from '../components/ConfettiLauncher.astro';
-import { asset } from '../lib/data';
+import ObservationList from "../components/ObservationList.astro"
 ---
 
 <div class="px-4 pt-6">
@@ -43,6 +42,8 @@ import { asset } from '../lib/data';
 					><span class="sr-only">Show information</span></button
 				>
 			</h3>
+
+			<!-- POP OVER -->
 			<div
 				data-popover
 				id="popover-description"
@@ -74,157 +75,10 @@ import { asset } from '../lib/data';
 				</div>
 				<div data-popper-arrow></div>
 			</div>
-			<div class="sm:hidden">
-				<label for="tabs" class="sr-only">Select tab</label>
-				<select
-					id="tabs"
-					class="bg-gray-50 border-0 border-b border-gray-200 text-gray-900 text-sm rounded-t-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-				>
-					<option>Positive</option>
-					<option>Negative</option>
-				</select>
-			</div>
-			<ul
-				class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg sm:flex dark:divide-gray-600 dark:text-gray-400"
-				id="fullWidthTab"
-				data-tabs-toggle="#fullWidthTabContent"
-				role="tablist"
-			>
-				<li class="w-full">
-					<button
-						id="faq-tab"
-						data-tabs-target="#faq"
-						type="button"
-						role="tab"
-						aria-controls="faq"
-						aria-selected="true"
-						class="inline-block w-full p-4 rounded-tl-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600"
-						>Positive</button
-					>
-				</li>
-				<li class="w-full">
-					<button
-						id="about-tab"
-						data-tabs-target="#about"
-						type="button"
-						role="tab"
-						aria-controls="about"
-						aria-selected="false"
-						class="inline-block w-full p-4 rounded-tr-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600"
-						>Negative</button
-					>
-				</li>
-			</ul>
-			<div
-				id="fullWidthTabContent"
-				class="border-t border-gray-200 dark:border-gray-600"
-			>
-				<div
-					class="hidden pt-4"
-					id="faq"
-					role="tabpanel"
-					aria-labelledby="faq-tab"
-				>
-					<ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-						<li class="py-3">
-							<div class="flex justify-between">
-								<div class="flex items-center min-w-0">
-									<div>
-										<p
-											class="font-medium text-gray-900 truncate dark:text-white"
-										>
-											Good stability
-										</p>
-									</div>
-								</div>
-								<div
-									class="text-base font-semibold text-gray-900 dark:text-white"
-								>
-									00:00 - 00:05
-								</div>
-							</div>
-							<p class="flex-1 text-sm text-gray-500">
-								The starting position of the bar seems correct, resting on the top of
-								the chest and shoulders, with the elbows elevated.
-							</p>
-						</li>
-						<li class="py-3">
-							<div class="flex justify-between">
-								<div class="flex items-center min-w-0">
-									<div>
-										<p
-											class="font-medium text-gray-900 truncate dark:text-white"
-										>
-											Good stability
-										</p>
-									</div>
-								</div>
-								<div
-									class="text-base font-semibold text-gray-900 dark:text-white"
-								>
-									00:00 - 00:05
-								</div>
-							</div>
-							<p class="flex-1 text-sm text-gray-500">
-								The starting position of the bar seems correct, resting on the top of
-								the chest and shoulders, with the elbows elevated.
-							</p>
-						</li>
-						<li class="py-3">
-							<div class="flex justify-between">
-								<div class="flex items-center min-w-0">
-									<div>
-										<p
-											class="font-medium text-gray-900 truncate dark:text-white"
-										>
-											Good stability
-										</p>
-									</div>
-								</div>
-								<div
-									class="text-base font-semibold text-gray-900 dark:text-white"
-								>
-									00:00 - 00:05
-								</div>
-							</div>
-							<p class="flex-1 text-sm text-gray-500">
-								The starting position of the bar seems correct, resting on the top of
-								the chest and shoulders, with the elbows elevated.
-							</p>
-						</li>
-					</ul>
-				</div>
-				<div
-					class="hidden pt-4"
-					id="about"
-					role="tabpanel"
-					aria-labelledby="about-tab"
-				>
-					<ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-						<li class="py-3">
-							<div class="flex justify-between">
-								<div class="flex items-center min-w-0">
-									<div>
-										<p
-											class="font-medium text-gray-900 truncate dark:text-white"
-										>
-											Bad form
-										</p>
-									</div>
-								</div>
-								<div
-									class="text-base font-semibold text-gray-900 dark:text-white"
-								>
-									00:00 - 00:05
-								</div>
-							</div>
-							<p class="flex-1 text-sm text-gray-500">
-								The form looks compromised for lack of strength
-							</p>
-						</li>
-					</ul>
-				</div>
-			</div>
+
+			<ObservationList />
+
+			<!-- FINAL SCORE -->
 			<div
 				class="flex justify-between items-center pt-3 border-t border-gray-200 sm:pt-6 dark:border-gray-700"
 			>
