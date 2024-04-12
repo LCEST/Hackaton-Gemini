@@ -1,5 +1,11 @@
 ---
+import Advices from "../components/Advices.astro";
 import ObservationList from "../components/ObservationList.astro"
+import RecommendedExercises from "../components/RecommendedExercises.astro";
+import Score from "../components/Score.astro"
+
+import { res } from "../services/api-response"
+const { observations, rating, advices, recommended_exercises } = res;
 ---
 
 <div class="px-4 pt-6">
@@ -76,37 +82,37 @@ import ObservationList from "../components/ObservationList.astro"
 				<div data-popper-arrow></div>
 			</div>
 
-			<ObservationList />
+			<ObservationList observations={observations} />
 
-			<!-- FINAL SCORE -->
-			<div
-				class="flex justify-between items-center pt-3 border-t border-gray-200 sm:pt-6 dark:border-gray-700"
-			>
-				<p class="font-medium text-gray-900 dark:text-white">Final score</p>
-				<div class="flex items-center gap-2">
-					<p
-						class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-blue-200 dark:text-blue-800"
-					>
-						7/10
-					</p>
-					<p class="ms-2 font-medium text-gray-900 dark:text-white">
-						Great
-					</p>
-				</div>
-			</div>
 		</div>
 		<!-- Feedback -->
 		<div
-			class="p-4 sm:p-6 xl:col-span-3 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
+			class="p-4 sm:p-6 xl:col-span-1 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
 		>
 			<h3
 				class="flex items-center mb-4 text-xl font-semibold text-gray-900 dark:text-white"
 			>
-				Coach Feedback
+			Coach Advices
 			</h3>
-			<p class="text-gray-900 dark:text-white">
-				This is a placeholder for all the content that's gonna be here
-			</p>
+			<Advices advices={advices} />
+	</div>
+	<div
+			class="p-4 sm:p-6 xl:col-span-1 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
+	>
+		<h3
+			class="flex items-center mb-4 text-xl font-semibold text-gray-900 dark:text-white"
+		>
+			Recommended Excercises
+		</h3>
+		<RecommendedExercises recommended={recommended_exercises} />
+	</div>
+	<div
+		class="p-4 sm:p-6 xl:col-span-1 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
+	>
+		<h3 class="flex items-center mb-4 text-xl font-semibold text-gray-900 dark:text-white">
+			Score
+		</h3>
+		<Score score={rating.score} />
 	</div>
 </div>
 

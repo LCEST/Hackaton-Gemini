@@ -1,0 +1,16 @@
+---
+import type { IAdvice } from "../types/endpointTypes"
+
+interface Props { advices: IAdvice[] }
+
+const { advices } = Astro.props
+---
+<div
+  class="flex-col items-center mb-4"
+>
+  <ul
+    class="pl-4 mb-4 space-y-3 text-sm text-gray-500 list-disc dark:text-gray-400"
+  >
+    {advices.map((adv: IAdvice) => <li id={adv.id+""}>{adv.advice}</li>)}
+  </ul>
+</div>

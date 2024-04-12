@@ -1,0 +1,23 @@
+---
+import type { IRecommendedExercise } from '../types/endpointTypes'
+
+interface Props {
+  recommended: IRecommendedExercise[];
+}
+
+const { recommended } = Astro.props;
+---
+{
+  recommended.map((rec: IRecommendedExercise) => {
+    return (
+      <p class="text-sm text-gray-900 dark:text-white">
+        {rec.exercise}
+      </p>
+      <p
+        class="text-sm mb-4 font-normal text-gray-500 dark:text-gray-400"
+      >
+        {rec.description}
+      </p>
+    )
+  })
+}

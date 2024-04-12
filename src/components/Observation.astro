@@ -1,25 +1,23 @@
 ---
-import type { ObservationData } from './ObservationList.astro';
+import type { IObservation } from "../types/endpointTypes";
 
-const { id, title, timeStart, timeEnd, comment } = Astro.props as ObservationData;
+const { id, title, timeStart, timeEnd, comment, isPositive } = Astro.props as IObservation;
 ---
 
-<li class="py-3" id={id}>
-  <div class="p-2 hover:bg-slate-900 transitiond duration-200 rounded-lg flex justify-between">
-    <div class="flex min-w-0">
-      <div>
-        <p
-          class="font-medium text-gray-900 truncate dark:text-white"
-        >
-          {title}
-        </p>
-      </div>
-    </div>
-    <div
-      class="text-base font-semibold text-gray-900 dark:text-white"
+<li class="py-3" id={String(id)}>
+  <div class="p-2 hover:bg-slate-900 hover:scale-100 scale-95 transition duration-200 ease-in-out rounded-lg flex justify-between cursor-pointer">
+    <p class="text-md text-base text-gray-900  dark:text-white"
     >
+      {title}
+    <p class:list={[
+      "text-sm font-medium me-2 px-2.5 py-0.5 rounded",
+      {
+        "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300": isPositive,
+        "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300": !isPositive
+      }
+    ]}>
       {timeStart} - {timeEnd}
-    </div>
+    </p>
   </div>
-  <p class="flex-1 text-sm px-2 text-gray-500">{comment}</p>
+  <p class="scale-95 flex-1 text-md px-2 text-gray-500">{comment}</p>
 </li>
