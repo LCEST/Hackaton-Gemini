@@ -5,7 +5,7 @@ import Observation from "./Observation.astro";
 const { observations } = Astro.props;
 ---
 <div
-  class="sm:max-h-[482px] tab-content"
+  class="max-h-[278px] xl:max-h-[482px] tab-content"
   id="positive"
   role="tabpanel"
   aria-labelledby="positive-tab"
@@ -23,17 +23,5 @@ const { observations } = Astro.props;
 <style>
 .tab-content {
   overflow-x: hidden;
-  /* overflow-y: auto; */
-  /* scrollbar-gutter: stable; */
 }  
-
-.tab-content:hover,
-.tab-content:active,
-.tab-content:focus {
-  /* overflow-y: scroll; */
-}
-
-.tab-content::-webkit-scrollbar {
-  /* width: 0.5em; */
-}
 </style>

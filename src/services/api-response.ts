@@ -29,26 +29,8 @@ export const res = {
             "score": 7,
             "isPositive": true
         },
-        // {
-        //     "id": 4,
-        //     "title": "Back Angle",
-        //     "timeStart": "00:06",
-        //     "timeEnd": "00:12",
-        //     "comment": "The back maintains a neutral and upright position throughout the squat.",
-        //     "score": 7,
-        //     "isPositive": true
-        // },
-        // {
-        //     "id": 5,
-        //     "title": "Back Angle",
-        //     "timeStart": "00:06",
-        //     "timeEnd": "00:12",
-        //     "comment": "The back maintains a neutral and upright position throughout the squat.",
-        //     "score": 7,
-        //     "isPositive": true
-        // },
         {
-            "id": 6,
+            "id": 4,
             "title": "Depth",
             "timeStart": "00:08",
             "timeEnd": "00:12",
