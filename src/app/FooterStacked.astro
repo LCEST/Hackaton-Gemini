@@ -1,5 +1,6 @@
 ---
 import CopyrightNotice from '../components/CopyrightNotice.astro';
+const SITE_URL = import.meta.env.SITE;
 ---
 
 <footer
@@ -7,34 +8,56 @@ import CopyrightNotice from '../components/CopyrightNotice.astro';
 >
 	<CopyrightNotice />
 
-	<ul class="flex flex-wrap items-center justify-center">
-		<li>
+	<ul class="flex flex-wrap justify-center items-center gap-4">
+		<li class="list-item mt-0">
 			<a
-				href="#"
-				class="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6 dark:text-gray-400"
-				>Terms</a
+				class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition duration-200 ease-in-out"
+				href=`https://twitter.com/intent/tweet?text=Check out this awesome project using Google's Gemini!&amp;url=${SITE_URL}`
+				target="_blank"
 			>
+				<svg
+					width="18"
+					height="18"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					class="icon icon-tabler icons-tabler-outline icon-tabler-share inline mt-0"
+				>
+					<path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+						d="M6 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path><path
+						d="M18 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path><path
+						d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path><path
+						d="M8.7 10.7l6.6 -3.4"></path><path d="M8.7 13.3l6.6 3.4"></path>
+				</svg>
+				Share
+			</a>
 		</li>
-		<li>
+		<li class="list-item mt-0">
 			<a
-				href="#"
-				class="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6 dark:text-gray-400"
-				>Licensing</a
+				class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition duration-200 ease-in-out"
+				href="https://github.com/LCEST/Hackaton-Gemini"
+				target="_blank"
 			>
-		</li>
-		<li>
-			<a
-				href="#"
-				class="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6 dark:text-gray-400"
-				>Cookie Policy</a
-			>
-		</li>
-		<li>
-			<a
-				href="#"
-				class="text-sm font-normal text-gray-500 hover:underline dark:text-gray-400"
-				>Contact</a
-			>
+				<svg
+					width="18"
+					height="18"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					class="icon icon-tabler icons-tabler-outline icon-tabler-code inline"
+				>
+					<path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+						d="M7 8l-4 4l4 4"></path><path d="M17 8l4 4l-4 4"></path><path
+						d="M14 4l-4 16"></path>
+				</svg>
+				Github
+			</a>
 		</li>
 	</ul>
 </footer>
