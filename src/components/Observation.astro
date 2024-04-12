@@ -5,7 +5,10 @@ const { id, title, timeStart, timeEnd, comment, isPositive } = Astro.props as IO
 ---
 
 <li class="py-3" id={String(id)}>
-  <div class="p-2 hover:bg-slate-900 hover:scale-100 scale-95 transition duration-200 ease-in-out rounded-lg flex justify-between cursor-pointer">
+  <div 
+    class="p-2 scale-95 transition duration-200 ease-in-out rounded-lg flex justify-between cursor-pointer current"
+    id=`observation-${id}`
+  >
     <p class="text-md text-base text-gray-900  dark:text-white"
     >
       {title}
@@ -21,3 +24,21 @@ const { id, title, timeStart, timeEnd, comment, isPositive } = Astro.props as IO
   </div>
   <p class="scale-95 flex-1 text-md px-2 text-gray-500">{comment}</p>
 </li>
+
+<script define:vars={{ id, timeStart }}>
+  const muxPlayerEl = document.querySelector('mux-player');
+  document.getElementById(`observation-${id}`).addEventListener("click", setVideoTime);
+
+  function setVideoTime() {
+    const start = +timeStart.slice(3);
+    muxPlayerEl.currentTime = start;
+  }
+</script>
+
+<style>
+  .active,
+  .current:hover {
+    transform: scale(1);
+    background-color: rgb(15 23 42);
+  }
+</style>

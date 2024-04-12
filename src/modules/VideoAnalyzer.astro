@@ -1,5 +1,6 @@
 ---
 import Advices from "../components/Advices.astro";
+import MuxVideo from "../components/MuxVideo.astro";
 import ObservationList from "../components/ObservationList.astro"
 import RecommendedExercises from "../components/RecommendedExercises.astro";
 import Score from "../components/Score.astro"
@@ -14,14 +15,7 @@ const { observations, rating, advices, recommended_exercises } = res;
 		<div
 			class="flex p-4 sm:p-6 md:col-span-2 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
 		>
-			<mux-player
-				stream-type="on-demand"
-				playback-id="EcHgOK9coz5K4rjSwOkoE7Y7O01201YMIC200RI6lNxnhs"
-				metadata-video-title="Analyzed video"
-				metadata-viewer-user-id="user-id-007"
-				title="Uploaded video"
-				loading="viewport"
-			></mux-player>
+			<MuxVideo />
 		</div>
 		<!-- Observations -->
 		<div
@@ -115,8 +109,6 @@ const { observations, rating, advices, recommended_exercises } = res;
 		<Score {...rating} />
 	</div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
 
 <style>
 	mux-player {

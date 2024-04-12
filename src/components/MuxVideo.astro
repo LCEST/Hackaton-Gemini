@@ -1,0 +1,97 @@
+---
+const cuePoints = [
+  {
+    time: 2,
+    value: [
+      {
+        id: 'observation-1',
+        endTime: 6,
+        duration: 4,
+      },
+    ]
+  },
+  {
+    time: 6,
+    value: [
+      {
+        id: 'observation-2',
+        endTime: 10,
+        duration: 4,
+      },
+      {
+        id: 'observation-3',
+        endTime: 12,
+        duration: 6,
+      },
+    ]
+  },
+  {
+    time: 8,
+    value: [
+      {
+        id: 'observation-4',
+        endTime: 12,
+        duration: 4,
+      },
+      {
+        id: 'observation-5',
+        endTime: 12,
+        duration: 4,
+      },
+    ]
+  } 
+]
+---
+
+<mux-player
+  stream-type="on-demand"
+  playback-id="EcHgOK9coz5K4rjSwOkoE7Y7O01201YMIC200RI6lNxnhs"
+  metadata-video-title="Analyzed video"
+  metadata-viewer-user-id="user-id-007"
+  title="Uploaded video"
+  loading="viewport"
+  muted
+  autoplay
+></mux-player>
+
+<script src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
+
+<script define:vars={{ cuePoints }}>
+const muxPlayerEl = document.querySelector('mux-player');
+let allObservations = [];
+let activeCuePoint;
+
+function addCuePointsToElement() {
+  muxPlayerEl.addCuePoints(cuePoints);
+  allObservations = cuePoints.map(({value}) => value.reduce((acc, curr) => [...acc, curr.id], []));
+  allObservations = allObservations.flat(1);
+}
+
+function setActiveObservations() {
+  activeCuePoint = muxPlayerEl.activeCuePoint;
+  const activeObservations = activeCuePoint.value.map((val) => val.id); // [observation-2, observation-3]
+  activeObservations.forEach((obs) => document.getElementById(obs).classList.add('active'));
+}
+
+function scrollToElement() {
+  const observationDiv = document.getElementById('observations-div');
+  const activeObservationId = activeCuePoint.value[0].id;
+  const activeEl = document.getElementById(activeObservationId);
+  observationDiv.scrollTo({
+    top: activeEl.offsetTop - observationDiv.offsetTop,
+    behavior: 'smooth',
+  });
+}
+
+const resetAllObservations = () => allObservations.forEach((obs) => document.getElementById(obs).classList.remove('active'));
+
+muxPlayerEl.addEventListener('cuepointchange', resetAllObservations);
+muxPlayerEl.addEventListener('cuepointchange', setActiveObservations);
+muxPlayerEl.addEventListener('cuepointchange', scrollToElement);
+
+if (muxPlayerEl.duration) {
+  addCuePointsToElement();
+} else {
+  muxPlayerEl.addEventListener('durationchange', addCuePointsToElement, { once: true });
+}
+</script>
