@@ -1,41 +1,48 @@
 ---
 const { score } = Astro.props;
 
-let verbalScore = '';
-if (score < 3) verbalScore = 'Bad';
-else if (score < 5) verbalScore = 'Needs improvement';
-else if (score < 7) verbalScore = 'Good';
-else if (score < 9) verbalScore = 'Great';
-else if (score === 10) verbalScore = 'Excellent';
+let scoreColor = '';
+let textColor = '';
+if (score < 5) {
+	scoreColor = 'rgb(240 82 82)';
+	textColor = 'rgb(119 29 29)';
+} else if (score < 7) {
+	scoreColor = 'rgb(194 120 3)';
+	textColor = 'rgb(99 49 18)';
+} else {
+	scoreColor = 'rgb(14 159 110)';
+	textColor = 'rgb(1 71 55)';
+}
 
-const degrees = `(${score}*180)/10deg`
-
+const degrees = `${(score*180)/10}deg`;
 ---
 <div class="pt-10 relative mx-auto my-0 h-[106px] w-[213px] flex">
 	<div
 		class="absolute h-[106px] w-[213px] overflow-hidden before:absolute before:h-[106px] before:w-[213px] before:rounded-t-[213px] before:border-[30px] before:border-b-0 before:border-gray-900"
 	>
 		<span
-			class="absolute top-full h-[106px] w-[213px] origin-top rounded-b-[213px] !border-t-0 transition-all duration-200"
-			style=`border: 30px solid rgb(52, 211, 153); transform: rotate(${(score*180)/10}deg);`
-		></span><div
+			class="absolute top-full h-[106px] w-[213px] origin-top rounded-b-[213px] !border-t-0 score"
+		></span>
+		<div
 			class="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-center"
 		>
 			<div
-				class="inline-flex shrink-0 items-center gap-2 rounded uppercase px-2 py-1 bg-emerald-400"
-				data-testid="tag"
+				class="inline-flex shrink-0 items-center gap-2 rounded uppercase px-2 py-1 scoreColor"
 			>
-				<span class="text-green-900 font-normal text-md"
-					><span class="font-bold">{score}/10</span></span
-				>
+				<span class="font-bold text-md scoreColor">{score}/10</span>
 			</div>
 		</div>
 	</div>
 </div>
 
-<style define:vars={{ degrees }}>
+<style define:vars={{ degrees, scoreColor, textColor }}>
   .score {
-    border: 30px solid rgb(52, 211, 153);
-    transform: rotate(--degrees);
+    border: 30px solid var(--scoreColor);
+    transform: rotate(var(--degrees));
   }
+
+	.scoreColor {
+		background-color: var(--scoreColor);
+		color: var(--textColor)	
+	}
 </style>
