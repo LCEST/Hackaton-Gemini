@@ -1,5 +1,7 @@
 ---
-const { score } = Astro.props;
+import type { IRating } from "../types/endpointTypes";
+
+const { score, description } = Astro.props as IRating;
 
 let scoreColor = '';
 let textColor = '';
@@ -16,7 +18,7 @@ if (score < 5) {
 
 const degrees = `${(score*180)/10}deg`;
 ---
-<div class="pt-10 relative mx-auto my-0 h-[106px] w-[213px] flex">
+<div class="relative mx-auto my-0 h-[106px] w-[213px] flex hover:scale-110 scale-100 transition duration-200 ease-in">
 	<div
 		class="absolute h-[106px] w-[213px] overflow-hidden before:absolute before:h-[106px] before:w-[213px] before:rounded-t-[213px] before:border-[30px] before:border-b-0 before:border-gray-900"
 	>
@@ -29,20 +31,33 @@ const degrees = `${(score*180)/10}deg`;
 			<div
 				class="inline-flex shrink-0 items-center gap-2 rounded uppercase px-2 py-1 scoreColor"
 			>
-				<span class="font-bold text-md scoreColor">{score}/10</span>
+				<span class="font-bold text-md scoreTextColor">{score}/10</span>
 			</div>
 		</div>
 	</div>
 </div>
+<p class="mt-4 text-sm text-gray-500 dark:text-gray-400"> {description} </p>
 
 <style define:vars={{ degrees, scoreColor, textColor }}>
   .score {
     border: 30px solid var(--scoreColor);
-    transform: rotate(var(--degrees));
+		animation: progress 2s forwards 0.5s;
   }
 
 	.scoreColor {
 		background-color: var(--scoreColor);
+	}
+
+	.scoreTextColor {
 		color: var(--textColor)	
+	}
+
+	@keyframes progress {
+    from {
+			transform: rotate(0deg);
+    }
+    to {
+			transform: rotate(var(--degrees));
+    }
 	}
 </style>

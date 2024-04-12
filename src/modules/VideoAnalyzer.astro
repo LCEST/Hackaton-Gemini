@@ -109,10 +109,10 @@ const { observations, rating, advices, recommended_exercises } = res;
 	<div
 		class="p-4 sm:p-6 xl:col-span-1 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
 	>
-		<h3 class="flex items-center mb-4 text-xl font-semibold text-gray-900 dark:text-white">
+		<h3 class="flex items-center text-xl font-semibold text-gray-900 dark:text-white">
 			Score
 		</h3>
-		<Score score={rating.score} />
+		<Score {...rating} />
 	</div>
 </div>
 
