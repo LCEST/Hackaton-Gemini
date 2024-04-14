@@ -6,7 +6,16 @@ import RecommendedExercises from "../components/RecommendedExercises.astro";
 import Score from "../components/Score.astro"
 
 import { res } from "../services/api-response"
-const { observations, rating, advices, recommended_exercises } = res;
+import { callGeminiAPI } from "../services/generativeVisionService"
+
+
+const geminiResponse = await callGeminiAPI(
+      "./example.mp4",
+    )
+
+const { observations, rating, advices, recommended_exercises } = geminiResponse;
+
+console.log(geminiResponse)
 ---
 
 <div class="px-4 pt-6">
