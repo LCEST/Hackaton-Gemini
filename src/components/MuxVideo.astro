@@ -1,46 +1,5 @@
 ---
-const cuePoints = [
-  {
-    time: 2,
-    value: [
-      {
-        id: 'observation-1',
-        endTime: 6,
-        duration: 4,
-      },
-    ]
-  },
-  {
-    time: 6,
-    value: [
-      {
-        id: 'observation-2',
-        endTime: 10,
-        duration: 4,
-      },
-      {
-        id: 'observation-3',
-        endTime: 12,
-        duration: 6,
-      },
-    ]
-  },
-  {
-    time: 8,
-    value: [
-      {
-        id: 'observation-4',
-        endTime: 12,
-        duration: 4,
-      },
-      {
-        id: 'observation-5',
-        endTime: 12,
-        duration: 4,
-      },
-    ]
-  } 
-]
+import { cuePoints } from "../app/constants";
 ---
 
 <mux-player
@@ -70,7 +29,7 @@ function addCuePointsToElement() {
 function setActiveObservations() {
   activeCuePoint = muxPlayerEl.activeCuePoint;
   const activeObservations = activeCuePoint.value.map((val) => val.id); // [observation-2, observation-3]
-  activeObservations.forEach((obs) => document.getElementById(obs).classList.add('active'));
+  activeObservations.forEach((obs) => document.getElementById(obs).classList.add('bg-blue-100', 'dark:bg-slate-900', 'scale-100'));
 }
 
 function scrollToElement() {
@@ -83,7 +42,7 @@ function scrollToElement() {
   });
 }
 
-const resetAllObservations = () => allObservations.forEach((obs) => document.getElementById(obs).classList.remove('active'));
+const resetAllObservations = () => allObservations.forEach((obs) => document.getElementById(obs).classList.remove('bg-blue-100', 'dark:bg-slate-900', 'scale-100'));
 
 muxPlayerEl.addEventListener('cuepointchange', resetAllObservations);
 muxPlayerEl.addEventListener('cuepointchange', setActiveObservations);
