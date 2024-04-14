@@ -29,7 +29,7 @@ function addCuePointsToElement() {
 function setActiveObservations() {
   activeCuePoint = muxPlayerEl.activeCuePoint;
   const activeObservations = activeCuePoint.value.map((val) => val.id); // [observation-2, observation-3]
-  activeObservations.forEach((obs) => document.getElementById(obs).classList.add('bg-blue-100', 'dark:bg-slate-900', 'scale-100'));
+  activeObservations.forEach((obs) => document.getElementById(obs).classList.add('bg-blue-100', 'dark:bg-slate-900', '!scale-100'));
 }
 
 function scrollToElement() {
@@ -42,7 +42,7 @@ function scrollToElement() {
   });
 }
 
-const resetAllObservations = () => allObservations.forEach((obs) => document.getElementById(obs).classList.remove('bg-blue-100', 'dark:bg-slate-900', 'scale-100'));
+const resetAllObservations = () => allObservations.forEach((obs) => document.getElementById(obs).classList.remove('bg-blue-100', 'dark:bg-slate-900', '!scale-100'));
 
 muxPlayerEl.addEventListener('cuepointchange', resetAllObservations);
 muxPlayerEl.addEventListener('cuepointchange', setActiveObservations);
