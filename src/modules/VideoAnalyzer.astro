@@ -11,74 +11,74 @@ const { observations, rating, advices, recommended_exercises } = res;
 
 <div class="px-4 pt-6">
 	<div class="grid gap-4 xl:grid-cols-3">
-		<!-- Video -->
-		<div
-			class="flex p-4 sm:p-6 md:col-span-2 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
-		>
-			<MuxVideo />
-		</div>
-		<!-- Observations -->
-		<div
-			class="flex-col p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800"
-		>
-			<h3
-				class="flex items-center mb-4 text-lg font-semibold text-gray-900 dark:text-white"
-			>
-				Observations
-				<button
-					data-popover-target="popover-description"
-					data-popover-placement="bottom-end"
-					type="button"
-					><svg
-						class="w-4 h-4 ml-2 text-gray-400 hover:text-gray-500"
-						aria-hidden="true"
-						fill="currentColor"
-						viewBox="0 0 20 20"
-						xmlns="http://www.w3.org/2000/svg"
-						><path
-							fill-rule="evenodd"
-							d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
-							clip-rule="evenodd"></path></svg
-					><span class="sr-only">Show information</span></button
-				>
-			</h3>
-
-			<!-- POP OVER -->
+			<!-- Video -->
 			<div
-				data-popover
-				id="popover-description"
-				role="tooltip"
-				class="absolute z-10 invisible inline-block text-sm font-light text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400"
+				class="flex p-4 sm:p-6 md:col-span-2 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
 			>
-				<div class="p-3 space-y-2">
-					<h3 class="font-semibold text-gray-900 dark:text-white">
-						Gemini AI
-					</h3>
-					<p>
-						Remember, all of the observations are made using Gemini AI
-					</p>
-					<a
-						href="#"
-						class="flex items-center font-medium text-primary-600 dark:text-primary-500 dark:hover:text-primary-600 hover:text-primary-700"
-						>Read more <svg
-							class="w-4 h-4 ml-1"
+				<MuxVideo />
+			</div>
+			<!-- Observations -->
+			<div
+				class="flex-col p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800"
+			>
+				<h3
+					class="flex items-center mb-4 text-lg font-semibold text-gray-900 dark:text-white"
+				>
+					Observations
+					<button
+						data-popover-target="popover-description"
+						data-popover-placement="bottom-end"
+						type="button"
+						><svg
+							class="w-4 h-4 ml-2 text-gray-400 hover:text-gray-500"
 							aria-hidden="true"
 							fill="currentColor"
 							viewBox="0 0 20 20"
 							xmlns="http://www.w3.org/2000/svg"
 							><path
 								fill-rule="evenodd"
-								d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+								d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
 								clip-rule="evenodd"></path></svg
-						></a
+						><span class="sr-only">Show information</span></button
 					>
+				</h3>
+
+				<!-- POP OVER -->
+				<div
+					data-popover
+					id="popover-description"
+					role="tooltip"
+					class="absolute z-10 invisible inline-block text-sm font-light text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400"
+				>
+					<div class="p-3 space-y-2">
+						<h3 class="font-semibold text-gray-900 dark:text-white">
+							Gemini AI
+						</h3>
+						<p>
+							Remember, all of the observations are made using Gemini AI
+						</p>
+						<a
+							href="#"
+							class="flex items-center font-medium text-primary-600 dark:text-primary-500 dark:hover:text-primary-600 hover:text-primary-700"
+							>Read more <svg
+								class="w-4 h-4 ml-1"
+								aria-hidden="true"
+								fill="currentColor"
+								viewBox="0 0 20 20"
+								xmlns="http://www.w3.org/2000/svg"
+								><path
+									fill-rule="evenodd"
+									d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+									clip-rule="evenodd"></path></svg
+							></a
+						>
+					</div>
+					<div data-popper-arrow></div>
 				</div>
-				<div data-popper-arrow></div>
+
+				<ObservationList observations={observations} />
+
 			</div>
-
-			<ObservationList observations={observations} />
-
-		</div>
 		<!-- Feedback -->
 		<div
 			class="p-4 sm:p-6 xl:col-span-1 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
@@ -89,24 +89,25 @@ const { observations, rating, advices, recommended_exercises } = res;
 			Coach Advices
 			</h3>
 			<Advices advices={advices} />
-	</div>
-	<div
-			class="p-4 sm:p-6 xl:col-span-1 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
-	>
-		<h3
-			class="flex items-center mb-4 text-xl font-semibold text-gray-900 dark:text-white"
+		</div>
+		<div
+				class="p-4 sm:p-6 xl:col-span-1 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
 		>
-			Recommended Excercises
-		</h3>
-		<RecommendedExercises recommended={recommended_exercises} />
-	</div>
-	<div
-		class="p-4 sm:p-6 xl:col-span-1 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
-	>
-		<h3 class="flex items-center text-xl font-semibold text-gray-900 dark:text-white">
-			Score
-		</h3>
-		<Score {...rating} />
+			<h3
+				class="flex items-center mb-4 text-xl font-semibold text-gray-900 dark:text-white"
+			>
+				Recommended Excercises
+			</h3>
+			<RecommendedExercises recommended={recommended_exercises} />
+		</div>
+		<div
+			class="p-4 sm:p-6 xl:col-span-1 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
+		>
+			<h3 class="flex items-center text-xl font-semibold text-gray-900 dark:text-white">
+				Score
+			</h3>
+			<Score {...rating} />
+		</div>
 	</div>
 </div>
 
