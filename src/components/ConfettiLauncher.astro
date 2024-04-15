@@ -39,8 +39,8 @@
 		};
 		const confetti = new ConfettiGenerator(confettiSettings);
 		confetti.render();
-		setInterval(() => confetti.clear(), 10000);
+		setTimeout(() => confetti.clear(), 10000);
 	}
 
-	popIt();
+	setTimeout(() => popIt(), 1500);
 </script>
