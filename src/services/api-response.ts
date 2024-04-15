@@ -1,6 +1,6 @@
-import type { GeminiResposne } from "../types/endpointTypes";
+import type { GeminiResponse } from "../types/endpointTypes";
 
-export const res = {
+export const localGeminiResponse = {
     "observations": [
         {
             "id": 1,
@@ -83,4 +83,4 @@ export const res = {
         "score": 7,
         "description": "The front squat technique demonstrates good bar placement, elbow position, and back angle. However, there are opportunities for improvement in squat depth and knee tracking. With focused practice and attention to the provided advice and recommended exercises, you can enhance your front squat performance and achieve better results."
     }
-} as GeminiResposne;
+} as GeminiResponse;

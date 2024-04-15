@@ -24,7 +24,7 @@ export interface IRating {
   description: string;
 }
 
-export interface GeminiResposne {
+export interface GeminiResponse {
   observations: IObservation[],
   advices: IAdvice[],
   recommended_exercises: IRecommendedExercise[],

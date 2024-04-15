@@ -4,22 +4,23 @@ import MuxVideo from "../components/MuxVideo.astro";
 import ObservationList from "../components/ObservationList.astro"
 import RecommendedExercises from "../components/RecommendedExercises.astro";
 import Score from "../components/Score.astro"
+import { callGeminiAPI } from "../services/generativeVisionService";
 
-import { res } from "../services/api-response"
-import { callGeminiAPI } from "../services/generativeVisionService"
-
+// fetch(`${import.meta.env.SITE}/api/get-data-gemini.json`)
+// 	.then(res => res.json())
+// 	.then(data => {
+// 		console.log(data);
+// 	});
 
 const geminiResponse = await callGeminiAPI(
-      "./example.mp4",
-    )
+	"./example.mp4",
+)
 
 const { observations, rating, advices, recommended_exercises } = geminiResponse;
-
-console.log(geminiResponse)
 ---
 
 <div class="sm:px-4 sm:pt-6">
-	<div class="grid gap-4 lg:grid-cols-3">
+	<div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 			<!-- Video -->
 			<div
 				class="flex p-0 sm:p-6 md:col-span-2 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
@@ -28,7 +29,7 @@ console.log(geminiResponse)
 			</div>
 			<!-- Observations -->
 			<div
-				class="flex-col p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800"
+				class="flex-col p-4 sm:p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800"
 			>
 				<h3
 					class="flex items-center mb-4 text-lg font-semibold text-gray-900 dark:text-white"
