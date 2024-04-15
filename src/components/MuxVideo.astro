@@ -1,5 +1,10 @@
 ---
-import { cuePoints } from "../app/constants";
+import type { ICuePoint } from "../types/cuePoint";
+interface Props {
+  cuePoints: ICuePoint[];
+}
+
+const { cuePoints } = Astro.props;
 ---
 
 <mux-player
