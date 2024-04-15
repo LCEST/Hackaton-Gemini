@@ -4,6 +4,7 @@ import MuxVideo from "../components/MuxVideo.astro";
 import ObservationList from "../components/ObservationList.astro"
 import RecommendedExercises from "../components/RecommendedExercises.astro";
 import Score from "../components/Score.astro"
+import Confettis from '../components/ConfettiLauncher.astro';
 import { formatCuePoints } from "../services/cuePoints";
 import { callGeminiAPI } from "../services/generativeVisionService";
 
@@ -14,7 +15,7 @@ const geminiResponse = await callGeminiAPI(
 const { observations, rating, advices, recommended_exercises } = geminiResponse;
 const formattedCuePoints = formatCuePoints(observations);
 ---
-
+{ rating.score === 10 && <Confettis /> }
 <div class="sm:px-4 sm:pt-6">
 	<div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 			<!-- Video -->
@@ -116,7 +117,7 @@ const formattedCuePoints = formatCuePoints(observations);
 			<Score {...rating} />
 		</div>
 	</div>
-</div>
+</>
 
 <style>
 	mux-player {
