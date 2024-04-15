@@ -83,7 +83,7 @@ async function callGeminiAPI (inputFilePath: string): Promise<GeminiResponse> {
                 "description": "string"
             }
         ],
-        "ratings": {
+        "rating": {
             "score": "int 1-10",
             "description": "string"
         }
