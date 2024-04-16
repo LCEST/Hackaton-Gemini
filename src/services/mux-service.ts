@@ -5,6 +5,11 @@ import type { IMuxVideoUploadGetResponse, IMuxVideoUploadResponse } from "../typ
 const { MUX_TOKEN_ID, MUX_TOKEN_SECRET } = import.meta.env;
 const usPwd = `${MUX_TOKEN_ID}:${MUX_TOKEN_SECRET}`;
 
+const headers = {
+  'Content-Type': 'application/json',
+  'Authorization': `Basic ${Buffer.from(usPwd).toString('base64')}`,
+}
+
 /**
  * POST a video upload and get it's data
  * @returns Post upload response object from MUX api
@@ -12,10 +17,7 @@ const usPwd = `${MUX_TOKEN_ID}:${MUX_TOKEN_SECRET}`;
 export async function postUpload(): Promise<IMuxVideoUploadResponse> {
   const res = await fetch(MUX_API_VIDEO_UPLOADS, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Basic ${Buffer.from(usPwd).toString('base64')}`
-    },
+    headers,
     body: JSON.stringify({
       new_asset_settings: {
         playback_policy: ["public"]
@@ -40,10 +42,7 @@ export async function postUpload(): Promise<IMuxVideoUploadResponse> {
 export async function getUpload(uploadId: string): Promise<IMuxVideoUploadGetResponse> {
   const res = await fetch(`${MUX_API_VIDEO_UPLOADS}/${uploadId}`, {
     method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Basic ${Buffer.from(usPwd).toString('base64')}`
-    },
+    headers,
   });
   if (!res.ok) {
     const errorMsg = `Failed to get mux asset: ${res.status} - ${res.statusText}`;
