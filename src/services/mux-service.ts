@@ -1,4 +1,3 @@
-import { Buffer } from 'buffer';
 import { MUX_API_VIDEO_UPLOADS } from "../app/constants";
 import type { IMuxVideoUploadGetResponse, IMuxVideoUploadResponse } from "../types/muxApi";
 
