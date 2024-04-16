@@ -16,4 +16,8 @@ const url = res.data.url;
 <script define:vars={{ url }}>
   const muxUploader = document.querySelector("mux-uploader");
   muxUploader.endpoint = url;
+
+  muxUploader.addEventListener("success", () => {
+    location.href = '/video-results';
+  })
 </script>
