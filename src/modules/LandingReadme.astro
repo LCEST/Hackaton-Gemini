@@ -2,9 +2,9 @@
 import '@mux/mux-uploader';
 import { postUpload } from '../services/mux-service';
 
-const { MUX_TOKEN_ID, MUX_TOKEN_SECRET } = import.meta.env;
-const res = await postUpload(MUX_TOKEN_ID, MUX_TOKEN_SECRET);
-const url = res.data.url;
+const uploadRes = await postUpload();
+const { url: uploadUrl, id } = uploadRes.data;
+console.log('POST UPLOAD:', uploadRes.data)
 ---
 
 <div>
@@ -13,11 +13,11 @@ const url = res.data.url;
 
 <script src="https://cdn.jsdelivr.net/npm/@mux/mux-uploader@1.0.0-beta.6"></script>
 
-<script define:vars={{ url }}>
+<script define:vars={{ uploadUrl, id }}>
   const muxUploader = document.querySelector("mux-uploader");
-  muxUploader.endpoint = url;
+  muxUploader.endpoint = uploadUrl;
 
   muxUploader.addEventListener("success", () => {
-    location.href = '/video-results';
-  })
+    location.href = `/video-results/${id}`;
+  });
 </script>

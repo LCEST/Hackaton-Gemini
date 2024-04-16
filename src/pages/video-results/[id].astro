@@ -1,0 +1,17 @@
+---
+import LayoutStacked from '../../app/LayoutStacked.astro';
+import VideoAnalyzer from '../../modules/VideoAnalyzer.astro';
+import { getUpload } from "../../services/mux-service";
+
+const { id } = Astro.params;
+
+if (id) {
+	const asset = await getUpload(id);
+	// TODO: Obtener asset con el playback id del asset (asset.data.id)
+}
+---
+
+<LayoutStacked>
+	<VideoAnalyzer />
+</LayoutStacked>
+
