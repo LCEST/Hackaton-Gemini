@@ -1,35 +1,27 @@
 import { Buffer } from 'buffer';
-import { MUX_API_URL } from "../app/constants";
-import type { APIMuxPostResponse } from "../types/muxApi";
+import { MUX_API_VIDEO_UPLOADS } from "../app/constants";
+import type { IMuxVideoUploadResponse } from "../types/muxApi";
 
-const { MUX_TOKEN_ID, MUX_TOKEN_SECRET } = import.meta.env;
-
-const usPwd = `${MUX_TOKEN_ID}:${MUX_TOKEN_SECRET}`;
-
-export async function postAsset(): Promise<APIMuxPostResponse> {
-  const res = await fetch(MUX_API_URL, {
+export async function postUpload(tokenId: string, tokenSecret: string): Promise<IMuxVideoUploadResponse> {
+  const usPwd = `${tokenId}:${tokenSecret}`;
+  const res = await fetch(MUX_API_VIDEO_UPLOADS, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Basic ${Buffer.from(usPwd).toString('base64')}`
     },
     body: JSON.stringify({
-      input: [
-        {
-          url: "https://muxed.s3.amazonaws.com/leds.mp4" 
-        }
-      ],
-      playback_policy: [
-        "public"
-      ],
-      encoding_tier: "baseline"
-    })
+      new_asset_settings: {
+        playback_policy: ["public"]
+      },
+      cors_origin: "*",
+      encoding_tier: "baseline",
+    }),
   });
-
   if (!res.ok) {
-    const errorMsg = `Failed to upload mux video: ${res.status} - ${res.statusText}`;
+    const errorMsg = `Failed to post mux upload video: ${res.status} - ${res.statusText}`;
     throw new Error(errorMsg);
   }
 
-  return await res.json() as APIMuxPostResponse;
+  return await res.json() as IMuxVideoUploadResponse;
 }
