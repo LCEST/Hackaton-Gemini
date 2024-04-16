@@ -9,13 +9,11 @@ const { cuePoints } = Astro.props;
 
 <mux-player
   stream-type="on-demand"
-  playback-id="EcHgOK9coz5K4rjSwOkoE7Y7O01201YMIC200RI6lNxnhs"
+  playback-id="DVvP02UyRoaWnxr1ZPuqslCyOF1YM8La1dTg8Squ8tng"
   metadata-video-title="Analyzed video"
-  metadata-viewer-user-id="user-id-007"
   title="Uploaded video"
   loading="viewport"
   muted
-  autoplay
 ></mux-player>
 
 <script src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
@@ -59,3 +57,9 @@ if (muxPlayerEl.duration) {
   muxPlayerEl.addEventListener('durationchange', addCuePointsToElement, { once: true });
 }
 </script>
+
+<style>
+	mux-player {
+		aspect-ratio: 16/9;
+	}
+</style>

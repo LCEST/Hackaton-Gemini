@@ -17,7 +17,6 @@ export async function postAsset(): Promise<APIMuxPostResponse> {
       input: [
         {
           url: "https://muxed.s3.amazonaws.com/leds.mp4" 
-          // url: "https://drive.google.com/file/d/1HRAF_eOZgTl88lOcaqj99rTouC2Xq6Hq/view?usp=drive_link" 
         }
       ],
       playback_policy: [
