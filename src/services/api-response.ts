@@ -85,9 +85,3 @@ export const localGeminiResponse = {
     "description": 'Overall, the athlete performed the front squat correctly. He had good form and technique, and he was able to lift the weight safely and effectively.'
   }
 } as GeminiResponse;
-
-const hola = () => {
-  console.log(localGeminiResponse);
-}
-
-hola();
