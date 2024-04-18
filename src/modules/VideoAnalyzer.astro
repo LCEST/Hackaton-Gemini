@@ -14,6 +14,7 @@ const geminiResponse = await callGeminiAPI(
 
 const { observations, rating, advices, recommended_exercises } = geminiResponse;
 const formattedCuePoints = formatCuePoints(observations);
+const { playbackId } = Astro.props;
 ---
 { rating.score === 10 && <Confettis /> }
 <div class="sm:px-4 sm:pt-6">
@@ -22,7 +23,7 @@ const formattedCuePoints = formatCuePoints(observations);
 			<div
 				class="flex p-0 sm:p-6 md:col-span-2 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
 			>
-				<MuxVideo cuePoints={formattedCuePoints} />
+				<MuxVideo cuePoints={formattedCuePoints} playbackId={playbackId} />
 			</div>
 			<!-- Observations -->
 			<div
