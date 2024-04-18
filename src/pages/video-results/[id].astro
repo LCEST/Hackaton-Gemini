@@ -1,17 +1,23 @@
 ---
 import LayoutStacked from '../../app/LayoutStacked.astro';
 import VideoAnalyzer from '../../modules/VideoAnalyzer.astro';
-import { getUpload } from "../../services/mux-service";
+// import MuxVideo from '../../components/MuxVideo.astro';
+import { getUpload, getAsset } from "../../services/mux-service";
 
 const { id } = Astro.params;
-
+let playback_ids = null;
 if (id) {
 	const asset = await getUpload(id);
+	const playback = await getAsset(asset.data.asset_id);
+    playback_ids = playback.data.playback_ids[0]?.id;
+	// console.log('playback id:',playback_ids)
+
 	// TODO: Obtener asset con el playback id del asset (asset.data.id)
 }
 ---
 
 <LayoutStacked>
-	<VideoAnalyzer />
+	<!-- <MuxVideo playbackId={playback_ids}cuePoints={} /> -->
+	<VideoAnalyzer playbackId={playback_ids} />
 </LayoutStacked>
 

@@ -1,6 +1,6 @@
 import { Buffer } from 'buffer';
-import { MUX_API_VIDEO_UPLOADS } from "../app/constants";
-import type { IMuxVideoUploadGetResponse, IMuxVideoUploadResponse } from "../types/muxApi";
+import { MUX_API_VIDEO_UPLOADS,MUX_API_VIDEO_ASSETS } from "../app/constants";
+import type { IMuxVideoUploadGetResponse, IMuxVideoUploadResponse, IMuxVideoAssetsGetResponse } from "../types/muxApi";
 
 const { MUX_TOKEN_ID, MUX_TOKEN_SECRET } = import.meta.env;
 const usPwd = `${MUX_TOKEN_ID}:${MUX_TOKEN_SECRET}`;
@@ -50,4 +50,16 @@ export async function getUpload(uploadId: string): Promise<IMuxVideoUploadGetRes
   }
 
   return await res.json() as IMuxVideoUploadGetResponse;
+}
+export async function getAsset(assetId: string): Promise<IMuxVideoAssetsGetResponse> {
+  const res = await fetch(`${MUX_API_VIDEO_ASSETS}/${assetId}`, {
+    method: 'GET',
+    headers,
+  });
+  if (!res.ok) {
+    const errorMsg = `Failed to get mux asset: ${res.status} - ${res.statusText}`;
+    throw new Error(errorMsg);
+  }
+
+  return await res.json() as IMuxVideoAssetsGetResponse;
 }

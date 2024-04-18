@@ -1,15 +1,17 @@
 ---
 import type { ICuePoint } from "../types/cuePoint";
 interface Props {
-  cuePoints: ICuePoint[];
+  cuePoints?: ICuePoint[];
+  playbackId?: string|null|undefined;
 }
 
-const { cuePoints } = Astro.props;
+const { cuePoints, playbackId } = Astro.props;
+console.log(playbackId)
 ---
 
 <mux-player
   stream-type="on-demand"
-  playback-id="DVvP02UyRoaWnxr1ZPuqslCyOF1YM8La1dTg8Squ8tng"
+  playback-id={playbackId}
   metadata-video-title="Analyzed video"
   title="Uploaded video"
   loading="viewport"
