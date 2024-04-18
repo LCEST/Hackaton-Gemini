@@ -1,5 +1,5 @@
 ---
-import LayoutCommon from '../../app/LayoutCommon.astro';
+import Layout from '../../app/Layout.astro';
 import VideoAnalyzer from '../../modules/VideoAnalyzer.astro';
 import { getUpload } from "../../services/mux-service";
 
@@ -10,6 +10,6 @@ if (id) {
 	// TODO: Obtener asset con el playback id del asset (asset.data.id)
 }
 ---
-<LayoutCommon >
+<Layout >
 	<VideoAnalyzer />
-</LayoutCommon>
+</Layout>

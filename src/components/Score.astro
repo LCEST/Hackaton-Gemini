@@ -20,7 +20,7 @@ const degrees = `${(score * 180) / 10}deg`;
 ---
 <div
 	id="radialScore"
-	class="flex relative mx-auto my-0 h-[106px] w-[213px] hover:scale-110 scale-100 transition-all duration-200 ease-in"
+	class="mx-auto mt-5 h-[106px] w-[213px] hover:scale-110 scale-100 transition-all duration-200 ease-in"
 >
 	<div
 		class="absolute h-[106px] w-[213px] overflow-hidden before:absolute before:h-[106px] before:w-[213px] before:rounded-t-[213px] before:border-[30px] before:border-b-0 before:border-gray-200 dark:before:border-gray-900"
@@ -29,7 +29,7 @@ const degrees = `${(score * 180) / 10}deg`;
 			class="absolute top-full h-[106px] w-[213px] origin-top rounded-b-[213px] !border-t-0 score"
 		></span>
 		<div
-			class="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-center"
+			class="absolute bottom-0 left-0 right-0 z-10 flex justify-center"
 		>
 			<div
 				class="inline-flex shrink-0 items-center gap-2 rounded uppercase px-2 py-1 scoreColor"
@@ -41,16 +41,8 @@ const degrees = `${(score * 180) / 10}deg`;
 </div>
 <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">{description}</p>
 
-<script>
-	const observer = new IntersectionObserver((entries) => {
-		entries.forEach((entry) => {
-			if (entry.isIntersecting) {
-				entry.target.classList.add('show');
-			}
-		});
-	});
-
-	const hidden = document.querySelectorAll('.score');
+<script is:inline data-astro-rerun>
+	var hidden = document.querySelectorAll('.score');
 	hidden.forEach((el) => observer.observe(el));
 </script>
 

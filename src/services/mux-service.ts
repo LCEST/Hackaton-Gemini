@@ -14,6 +14,10 @@ const headers = {
  * @returns Post upload response object from MUX api
  */
 export async function postUpload(): Promise<IMuxVideoUploadResponse> {
+
+  // if (process.env.NODE_ENV === 'development')
+  //   return {data: {url: '', id: ''}} as IMuxVideoUploadResponse;
+  
   const res = await fetch(MUX_API_VIDEO_UPLOADS, {
     method: 'POST',
     headers,

@@ -1,0 +1,36 @@
+---
+import '@mux/mux-uploader';
+import { postUpload } from '../services/mux-service';
+
+const uploadRes = await postUpload();
+const { url, id } = uploadRes.data;
+console.log('POST UPLOAD:', uploadRes.data)
+---
+
+<div class="mt-4 flex-row flex justify-center" transition:animate="slide">
+  <!-- <mux-uploader></mux-uploader> -->
+  <a
+    class="bg-blue-200 hover:bg-blue-400 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-800 hover:scale-105 py-3 px-4 rounded-md transition-all duration-200 ease-in-out"
+    href="/video-results"
+  >
+    Go to results
+  </a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@mux/mux-uploader@1.0.0-beta.6"></script>
+
+<script src="../services/api-response.ts"></script>
+
+<script define:vars={{ url, id }}>
+  const muxUploader = document.querySelector("mux-uploader");
+  muxUploader.endpoint = url;
+
+  muxUploader.addEventListener("file-ready", function(e) {
+    console.log(e);
+    console.log(e.detail);
+  });
+
+  muxUploader.addEventListener("success", () => {
+    // location.href = `/video-results/${id}`;
+  });
+</script>
