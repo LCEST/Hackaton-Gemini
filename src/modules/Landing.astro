@@ -23,6 +23,33 @@ console.log('POST UPLOAD:', url);
   const muxUploader = document.querySelector("mux-uploader");
   muxUploader.endpoint = url;
 
+  muxUploader.addEventListener("file-ready", function (e) {
+    const file = e.detail;
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      // The `onload` event is triggered when the reading of the file is finished.
+      const base64 = event.target.result; // Obtener la cadena Base64 del resultado del evento
+      var uint8Array = new Uint8Array(base64);
+
+      // Convert the Uint8Array to a binary string
+      var binaryString = '';
+      for (var i = 0; i < uint8Array.length; i++) {
+        binaryString += String.fromCharCode(uint8Array[i]);
+      }
+
+      // Encode the binary string in base64
+      var base64String = btoa(binaryString);
+      const mimeType = file.type;
+
+      // TODO: callGeminiAPI(base64String, mimeType);
+    
+
+      };
+      reader.readAsArrayBuffer(file);
+    });
+
+
   muxUploader.addEventListener("success", () => {
     location.href = `/video-results/${id}`;
   });
