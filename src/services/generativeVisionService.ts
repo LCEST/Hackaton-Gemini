@@ -38,11 +38,21 @@ function getMimeType(filePath: string): string | null {
   const extension = filePath.split(".").pop()!.toLowerCase();
   return extensionToMimeType[extension] ?? null;
 }
+
+const waitForSeconds = (seconds = 4000) => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve('done'), seconds);
+  });
+}
+
 // Function to call the Gemini API
 async function callGeminiAPI (base64File: string, mimeType: string): Promise<GeminiResponse> {
 
-  if (import.meta.env.ENVIRONMENT === "development")
+  if (import.meta.env.ENVIRONMENT === "development") {
+    // We will wait x seconds to simulate gemini analysis
+    await waitForSeconds();
     return localGeminiResponse;
+  }
 
   // Initialize Vertex with your Cloud project and location
   const vertexAI = new VertexAI({

@@ -5,155 +5,96 @@ import { callGeminiAPI } from '../services/generativeVisionService';
 
 const uploadRes = await postUpload();
 const { url, id } = uploadRes.data;
-console.log('POST UPLOAD:', url);
-
-
 
 if (Astro.request.method === "POST") {
-  
-  try {
-    const data = await Astro.request.formData();
-    
-    const base64String = data.get("base64String");
-    const mimeType = data.get("mimeType");
-
-    if (base64String && mimeType) {
-      const res = await callGeminiAPI(base64String.toString(), mimeType.toString());
-      console.log(res);
-    }
-    
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message);
-    }
-  }
+  const data = await Astro.request.formData();
+  const file = data.get('file') as File;
+  const fileBuffer = await file.arrayBuffer()
+  const b64 = Buffer.from(fileBuffer).toString('base64');
+  const geminiRes = await callGeminiAPI(b64, file.type);
+  // TODO: Guardar geminiRes en localstorage para luego redirigir al usuario a su resultado.
 }
-
 ---
 
-<mux-uploader></mux-uploader>
-<div class="mt-4 flex-row flex justify-center" transition:animate="slide">
-  <a
-    class="bg-blue-200 hover:bg-blue-400 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-800 hover:scale-105 py-3 px-4 rounded-md transition-all duration-200 ease-in-out"
-    href="/video-results"
+<div class="flex justify-center">
+  <mux-uploader id="uploader" class="hidden"></mux-uploader>
+  <form 
+    class="mt-2 space-y-6"
+    method="post"
+    enctype="multipart/form-data"
   >
-    Go to results
-  </a>
-</div>
-
-<div id="loader" class="hidden">
-  <span class="loader"></span>
-  <p id="progress"></p>
+    <mux-uploader-drop
+      class="flex flex-col gap-4 items-center w-full max-w-xl p-6 bg-white rounded-lg shadow dark:bg-gray-800"
+      mux-uploader="uploader"
+      id="uploader-drop"
+    >
+      <span 
+        class="text-2xl text-center font-bold text-gray-900 dark:text-white"
+      >
+        Drop a video file here to upload
+      </span>
+      <span
+        class="text-sm font-normal text-gray-900 dark:text-white"
+      >
+        or
+      </span>
+      <mux-uploader-file-select 
+        mux-uploader="uploader"
+        id="file-select"
+      >
+        <button
+          class="bg-blue-200 hover:bg-blue-400 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-900 hover:scale-105 py-3 px-4 rounded-md transition-all duration-200 ease-in-out"
+          type="button"
+          id="pick-file-btn"
+        >
+          Pick a file 
+        </button>
+      </mux-uploader-file-select>
+      <mux-uploader-progress
+        type="percentage"
+        mux-uploader="uploader"
+        class="text-xs font-bold dark:text-white"
+      ></mux-uploader-progress>
+    </mux-uploader-drop>
+  </form>
 </div>
 
 <style>
-    .loader {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    display: inline-block;
-    position: relative;
-    border: 3px solid;
-    border-color: #FFF #FFF transparent;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
+  mux-uploader-progress {
+    --progress-bar-fill-color: rgb(118 169 250)
   }
-  .loader::after {
-    content: '';  
-    box-sizing: border-box;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    border: 3px solid;
-    border-color: transparent #FF3D00 #FF3D00;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    animation: rotationBack 0.5s linear infinite;
-    transform-origin: center center;
-  }
-
-  @keyframes rotation {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  } 
-      
-  @keyframes rotationBack {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(-360deg);
-    }
+  mux-uploader-drop[active] {
+    @apply bg-blue-400 dark:bg-gray-700 transition-all duration-200
   }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/@mux/mux-uploader@1.0.0-beta.6"></script>
 
 <script define:vars={{ url, id }}>
-  const muxUploader = document.querySelector("mux-uploader");
+  const muxUploader = document.querySelector('mux-uploader');
   muxUploader.endpoint = url;
 
-  muxUploader.addEventListener("progress", (e) => {
-    const loader = document.getElementById('loader');
-    loader.classList.remove('hidden');
+  // TODO: Event listener 'upload-error'. ¿Qué vamos a hacer cuando no se pueda subir el video a MUX?
+  // Mostrar pantalla de error y pedirle al usuario que vuelva a intentar.
 
-    const progress = document.getElementById('progress');
-    progress.innerHTML = `${Math.round(e.detail)}%`;
+  muxUploader.addEventListener('file-ready', (e) => {
+    const file = e.detail;
+    // TODO: Validar que el tipo del archivo sea video. De no ser así, NO ejecutar el fetch.
+
+    const form = document.querySelector('form');
+    const formData = new FormData(form);
+    formData.append('file', file);
+    fetch('/', {
+      method: 'POST',
+      body: formData,
+    });
   });
 
-  muxUploader.addEventListener("file-ready", function (e) {
-    const file = e.detail;
-    const reader = new FileReader();
-
-    reader.onload = (event) => {
-      // The `onload` event is triggered when the reading of the file is finished.
-      const base64 = event.target.result; // Obtener la cadena Base64 del resultado del evento
-      var uint8Array = new Uint8Array(base64);
-
-      // Convert the Uint8Array to a binary string
-      var binaryString = '';
-      for (var i = 0; i < uint8Array.length; i++) {
-        binaryString += String.fromCharCode(uint8Array[i]);
-      }
-
-      // Encode the binary string in base64
-      var base64String = btoa(binaryString);
-      const mimeType = file.type;
-
-      (async () => {
-        const formData = new FormData();
-        formData.append('base64String', base64String);
-        formData.append('mimeType', mimeType);
-
-
-        try {
-          const response = await fetch('/', {
-            method: 'POST',
-            body: formData,
-          });
-
-          if (!response.ok) throw new Error('Network response was not ok.');
-          console.log('Registrado con éxito');
-        } catch (error) {
-          console.error('Error:', error);
-        }
-      })();
-
-
-    
-
-      };
-      reader.readAsArrayBuffer(file);
-    });
-
+  muxUploader.addEventListener('progress', (e) => {
+    // TODO: Ocultar el form y mostrar un componente de carga mientras pasan dos cosas:
+    // a. Se sube el video
+    // b. Se analiza con IA
+  });
 
   muxUploader.addEventListener("success", () => {
     //location.href = `/video-results/${id}`;
