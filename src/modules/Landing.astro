@@ -5,6 +5,28 @@ import { postUpload } from '../services/mux-service';
 const uploadRes = await postUpload();
 const { url, id } = uploadRes.data;
 console.log('POST UPLOAD:', url);
+
+
+
+if (Astro.request.method === "POST") {
+  
+  try {
+    const data = await Astro.request.formData();
+    
+    const base64String = data.get("base64String");
+    const mimeType = data.get("mimeType");
+    console.log(base64String);
+    console.log(mimeType);
+    
+    
+    
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+}
+
 ---
 
 <div class="mt-4 flex-row flex justify-center" transition:animate="slide">
@@ -42,7 +64,26 @@ console.log('POST UPLOAD:', url);
       var base64String = btoa(binaryString);
       const mimeType = file.type;
 
-      // TODO: callGeminiAPI(base64String, mimeType);
+      (async () => {
+        const formData = new FormData();
+        formData.append('base64String', base64String);
+        formData.append('mimeType', mimeType);
+
+
+        try {
+          const response = await fetch('/', {
+            method: 'POST',
+            body: formData,
+          });
+
+          if (!response.ok) throw new Error('Network response was not ok.');
+          console.log('Registrado con éxito');
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      })();
+
+
     
 
       };
@@ -51,6 +92,6 @@ console.log('POST UPLOAD:', url);
 
 
   muxUploader.addEventListener("success", () => {
-    location.href = `/video-results/${id}`;
+    //location.href = `/video-results/${id}`;
   });
 </script>

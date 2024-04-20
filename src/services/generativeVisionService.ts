@@ -39,7 +39,7 @@ function getMimeType(filePath: string): string | null {
   return extensionToMimeType[extension] ?? null;
 }
 // Function to call the Gemini API
-async function callGeminiAPI (inputFilePath: string): Promise<GeminiResponse> {
+async function callGeminiAPI (base64File: string, mimeType: string): Promise<GeminiResponse> {
 
   if (process.env.NODE_ENV === 'development')
     return localGeminiResponse;
@@ -91,10 +91,9 @@ async function callGeminiAPI (inputFilePath: string): Promise<GeminiResponse> {
   };
 
   const requestPart: unknown[] = [textPart];
-
+  
   // Gemini requires the file in base64 and with a mimetype
-  const base64File = await getFileAsBase64(inputFilePath);
-  const mimeType = getMimeType(inputFilePath);
+
 
   const filePart = {
     inlineData: {
