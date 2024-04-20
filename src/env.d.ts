@@ -8,6 +8,7 @@ interface ImportMetaEnv {
 	readonly PROJECT_LOCATION: string;
 	readonly PROJECT_ID: string;
 	readonly MODEL: string;
+	readonly ENVIRONMENT: string;
 }
 
 interface ImportMeta {

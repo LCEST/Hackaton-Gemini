@@ -1,6 +1,7 @@
 ---
 import '@mux/mux-uploader';
 import { postUpload } from '../services/mux-service';
+import { callGeminiAPI } from '../services/generativeVisionService';
 
 const uploadRes = await postUpload();
 const { url, id } = uploadRes.data;
@@ -15,10 +16,11 @@ if (Astro.request.method === "POST") {
     
     const base64String = data.get("base64String");
     const mimeType = data.get("mimeType");
-    console.log(base64String);
-    console.log(mimeType);
-    
-    
+
+    if (base64String && mimeType) {
+      const res = await callGeminiAPI(base64String.toString(), mimeType.toString());
+      console.log(res);
+    }
     
   } catch (error) {
     if (error instanceof Error) {
@@ -29,8 +31,8 @@ if (Astro.request.method === "POST") {
 
 ---
 
+<mux-uploader></mux-uploader>
 <div class="mt-4 flex-row flex justify-center" transition:animate="slide">
-  <mux-uploader></mux-uploader>
   <a
     class="bg-blue-200 hover:bg-blue-400 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-800 hover:scale-105 py-3 px-4 rounded-md transition-all duration-200 ease-in-out"
     href="/video-results"
@@ -39,11 +41,73 @@ if (Astro.request.method === "POST") {
   </a>
 </div>
 
+<div id="loader" class="hidden">
+  <span class="loader"></span>
+  <p id="progress"></p>
+</div>
+
+<style>
+    .loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    border: 3px solid;
+    border-color: #FFF #FFF transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+  .loader::after {
+    content: '';  
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border: 3px solid;
+    border-color: transparent #FF3D00 #FF3D00;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    animation: rotationBack 0.5s linear infinite;
+    transform-origin: center center;
+  }
+
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  } 
+      
+  @keyframes rotationBack {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(-360deg);
+    }
+  }
+</style>
+
 <script src="https://cdn.jsdelivr.net/npm/@mux/mux-uploader@1.0.0-beta.6"></script>
 
 <script define:vars={{ url, id }}>
   const muxUploader = document.querySelector("mux-uploader");
   muxUploader.endpoint = url;
+
+  muxUploader.addEventListener("progress", (e) => {
+    const loader = document.getElementById('loader');
+    loader.classList.remove('hidden');
+
+    const progress = document.getElementById('progress');
+    progress.innerHTML = `${Math.round(e.detail)}%`;
+  });
 
   muxUploader.addEventListener("file-ready", function (e) {
     const file = e.detail;

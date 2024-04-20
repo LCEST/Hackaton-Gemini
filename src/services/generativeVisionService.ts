@@ -41,7 +41,7 @@ function getMimeType(filePath: string): string | null {
 // Function to call the Gemini API
 async function callGeminiAPI (base64File: string, mimeType: string): Promise<GeminiResponse> {
 
-  if (process.env.NODE_ENV === 'development')
+  if (import.meta.env.ENVIRONMENT === "development")
     return localGeminiResponse;
 
   // Initialize Vertex with your Cloud project and location
