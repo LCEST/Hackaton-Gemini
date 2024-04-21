@@ -6,13 +6,9 @@ import RecommendedExercises from "../components/RecommendedExercises.astro";
 import Score from "../components/Score.astro"
 import Confettis from '../components/ConfettiLauncher.astro';
 import { formatCuePoints } from "../services/cuePoints";
-import { callGeminiAPI } from "../services/generativeVisionService";
+import { localGeminiResponse } from "../services/api-response";
 
-const geminiResponse = await callGeminiAPI(
-	"./example.mp4",
-)
-
-const { observations, rating, advices, recommended_exercises } = geminiResponse;
+const { observations, rating, advices, recommended_exercises } = localGeminiResponse;
 const formattedCuePoints = formatCuePoints(observations);
 const { playbackId } = Astro.props;
 ---

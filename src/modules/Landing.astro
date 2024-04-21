@@ -1,20 +1,10 @@
 ---
 import '@mux/mux-uploader';
 import { postUpload } from '../services/mux-service';
-import { callGeminiAPI } from '../services/generativeVisionService';
 import Loader from '../components/Loader.astro';
 
 const uploadRes = await postUpload();
 const { url, id } = uploadRes.data;
-
-if (Astro.request.method === "POST") {
-  const data = await Astro.request.formData();
-  const file = data.get('file') as File;
-  const fileBuffer = await file.arrayBuffer()
-  const b64 = Buffer.from(fileBuffer).toString('base64');
-  const geminiRes = await callGeminiAPI(b64, file.type);
-  // TODO: Guardar geminiRes en localstorage para luego redirigir al usuario a su resultado.
-}
 ---
 
 <div class=" min-h-screen pt-8 flex flex-col items-center">
@@ -76,7 +66,7 @@ if (Astro.request.method === "POST") {
   // TODO: Event listener 'upload-error'. ¿Qué vamos a hacer cuando no se pueda subir el video a MUX?
   // Mostrar pantalla de error y pedirle al usuario que vuelva a intentar.
 
-  muxUploader.addEventListener('file-ready', (e) => {
+  muxUploader.addEventListener('file-ready', async (e) => {
     const file = e.detail;
     // TODO: Validar que el tipo del archivo sea video. De no ser así, NO ejecutar el fetch.
 
@@ -91,16 +81,14 @@ if (Astro.request.method === "POST") {
 
     const formData = new FormData();
     formData.append('file', file);
-    fetch('/', {
+
+    const res = await fetch('http://localhost:2121/api/gemini-data.json', {
       method: 'POST',
       body: formData,
     });
-  });
-
-  muxUploader.addEventListener('progress', (e) => {
-    // TODO: Ocultar el form y mostrar un componente de carga mientras pasan dos cosas:
-    // a. Se sube el video
-    // b. Se analiza con IA
+    const geminiResponse = await res.json();
+    localStorage.setItem(id, geminiResponse);
+    location.href = `video-results/${id}`
   });
 
   muxUploader.addEventListener("success", () => {
