@@ -7,8 +7,9 @@ import Score from "../components/Score.astro"
 import Confettis from '../components/ConfettiLauncher.astro';
 import { formatCuePoints } from "../services/cuePoints";
 import type { GeminiResponse } from "../types/endpointTypes";
+import { API_URL } from "../app/constants";
 
-const geminiData = await fetch('http://localhost:2121/api/gemini-data.json');
+const geminiData = await fetch(`${API_URL}gemini-data.json`);
 const parsedData = await geminiData.json() as GeminiResponse;
 
 const { observations, rating, advices, recommended_exercises } = parsedData;

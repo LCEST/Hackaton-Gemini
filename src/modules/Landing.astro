@@ -1,8 +1,8 @@
 ---
 import '@mux/mux-uploader';
 import { postUpload } from '../services/mux-service';
-import { url } from '../lib/data.js';
 import Loader from '../components/Loader.astro';
+import { API_URL } from '../app/constants';
 
 const uploadRes = await postUpload();
 const { url: uploadUrl, id } = uploadRes.data;
@@ -58,9 +58,11 @@ const { url: uploadUrl, id } = uploadRes.data;
   }
 </style>
 
-<script src="https://cdn.jsdelivr.net/npm/@mux/mux-uploader@1.0.0-beta.6"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mux/mux-uploader@1.0.0-beta.6">
+import { API_URL } from "../app/constants";
+</script>
 
-<script define:vars={{ uploadUrl, id, url }}>
+<script define:vars={{ uploadUrl, id, API_URL }}>
   const muxUploader = document.querySelector('mux-uploader');
   muxUploader.endpoint = uploadUrl;
 
@@ -83,13 +85,13 @@ const { url: uploadUrl, id } = uploadRes.data;
     const formData = new FormData();
     formData.append('file', file);
 
-    const res = await fetch(`${url}/api/gemini-data.json`, {
+    const res = await fetch(`${API_URL}/gemini-data.json`, {
       method: 'POST',
       body: formData,
     });
     const geminiResponse = await res.json();
     localStorage.setItem(id, geminiResponse);
-    location.href = `${url}/video-results/${id}`
+    location.href = `/video-results/${id}`
   });
 
   muxUploader.addEventListener("success", () => {
