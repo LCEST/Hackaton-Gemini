@@ -2,9 +2,8 @@
 import pkg from '../../package.json' assert { type: 'json' };
 import { url } from '../lib/data.js';
 import { ViewTransitions } from 'astro:transitions';
-
 import { SITE_TITLE } from './constants.js';
-import FooterStacked from './FooterStacked.astro';
+import Footer from './Footer.astro';
 import NavBar from './NavBar.astro';
 
 const { class: clazz } = Astro.props;
@@ -82,7 +81,7 @@ const { class: clazz } = Astro.props;
 					<slot />
 				</div>
 
-				<FooterStacked />
+				<Footer />
 			</div>
 		</div>
 	</body>

@@ -1,7 +1,6 @@
 ---
 import Layout from '../../app/Layout.astro';
 import VideoAnalyzer from '../../modules/VideoAnalyzer.astro';
-// import MuxVideo from '../../components/MuxVideo.astro';
 import { getUpload, getAsset } from "../../services/mux-service";
 
 const { id } = Astro.params;
@@ -9,7 +8,7 @@ let playback_ids = null;
 if (id) {
 	const asset = await getUpload(id);
 	const playback = await getAsset(asset.data.asset_id);
-    playback_ids = playback.data.playback_ids[0]?.id;
+	playback_ids = playback.data.playback_ids[0]?.id;
 }
 ---
 <Layout >
