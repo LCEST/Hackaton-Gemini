@@ -6,9 +6,12 @@ import RecommendedExercises from "../components/RecommendedExercises.astro";
 import Score from "../components/Score.astro"
 import Confettis from '../components/ConfettiLauncher.astro';
 import { formatCuePoints } from "../services/cuePoints";
-import { localGeminiResponse } from "../services/api-response";
+import type { GeminiResponse } from "../types/endpointTypes";
 
-const { observations, rating, advices, recommended_exercises } = localGeminiResponse;
+const geminiData = await fetch('http://localhost:2121/api/gemini-data.json');
+const parsedData = await geminiData.json() as GeminiResponse;
+
+const { observations, rating, advices, recommended_exercises } = parsedData;
 const formattedCuePoints = formatCuePoints(observations);
 const { playbackId } = Astro.props;
 ---

@@ -1,5 +1,8 @@
 import type { APIRoute } from "astro";
 import { callGeminiAPI } from "../../services/generativeVisionService";
+import type { GeminiResponse } from "../../types/endpointTypes";
+
+let geminiAnalysis = {};
 
 export const POST: APIRoute = async ({ request }) => {
   // Get the file form the FormData
@@ -13,6 +16,11 @@ export const POST: APIRoute = async ({ request }) => {
   // Get Gemini response and stringify it
   const geminiRes = await callGeminiAPI(b64, file.type);
   const jsonRes = JSON.stringify(geminiRes);
+  geminiAnalysis = geminiRes as GeminiResponse;
 
   return new Response(jsonRes);
+}
+
+export const GET: APIRoute = async ({ request }) => {
+  return new Response(JSON.stringify(geminiAnalysis));
 }

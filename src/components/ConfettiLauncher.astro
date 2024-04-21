@@ -23,11 +23,7 @@
 </style>
 
 <script>
-	// @ts-ignore
 	const confettiElement = document.querySelector('#confettis');
-	const triggerConfettis = document.querySelector('[data-trigger-confettis]');
-
-	triggerConfettis.addEventListener('click', popIt);
 
 	function popIt() {
 		const confettiSettings = {
@@ -42,5 +38,6 @@
 		setTimeout(() => confetti.clear(), 10000);
 	}
 
-	setTimeout(() => popIt(), 1500);
+	if (confettiElement)
+		setTimeout(() => popIt(), 1500);
 </script>
