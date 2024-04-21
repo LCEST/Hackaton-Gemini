@@ -21,6 +21,6 @@ export const POST: APIRoute = async ({ request }) => {
   return new Response(jsonRes);
 }
 
-export const GET: APIRoute = async ({ request }) => {
+export const GET: APIRoute = async () => {
   return new Response(JSON.stringify(geminiAnalysis));
 }

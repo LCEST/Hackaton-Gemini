@@ -3,6 +3,8 @@ import Layout from '../../app/Layout.astro';
 import VideoAnalyzer from '../../modules/VideoAnalyzer.astro';
 import { getUpload, getAsset } from "../../services/mux-service";
 
+export const prerender = false;
+
 const { id } = Astro.params;
 let playback_ids = null;
 if (id) {

@@ -11,7 +11,7 @@ export default defineConfig({
 		? 'https://antinunai.netlify.app'
 		: `http://localhost:${DEV_PORT}`,
 	base: process.env.CI ? '/' : undefined,
-	output: 'server',
+	output: 'hybrid',
 	adapter: netlify(),
 	trailingSlash: 'always',
 
