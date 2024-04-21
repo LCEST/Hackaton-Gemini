@@ -2,6 +2,7 @@
 import '@mux/mux-uploader';
 import { postUpload } from '../services/mux-service';
 import { callGeminiAPI } from '../services/generativeVisionService';
+import Loader from '../components/Loader.astro';
 
 const uploadRes = await postUpload();
 const { url, id } = uploadRes.data;
@@ -16,13 +17,14 @@ if (Astro.request.method === "POST") {
 }
 ---
 
-<div class="flex justify-center">
-  <mux-uploader id="uploader" class="hidden"></mux-uploader>
+<div class=" min-h-screen pt-8 flex flex-col items-center">
+  <Loader />
   <form 
-    class="mt-2 space-y-6"
     method="post"
     enctype="multipart/form-data"
+    id="main-form"
   >
+    <mux-uploader id="uploader" class="hidden"></mux-uploader>
     <mux-uploader-drop
       class="flex flex-col gap-4 items-center w-full max-w-xl p-6 bg-white rounded-lg shadow dark:bg-gray-800"
       mux-uploader="uploader"
@@ -60,9 +62,6 @@ if (Astro.request.method === "POST") {
 </div>
 
 <style>
-  mux-uploader-progress {
-    --progress-bar-fill-color: rgb(118 169 250)
-  }
   mux-uploader-drop[active] {
     @apply bg-blue-400 dark:bg-gray-700 transition-all duration-200
   }
@@ -81,8 +80,13 @@ if (Astro.request.method === "POST") {
     const file = e.detail;
     // TODO: Validar que el tipo del archivo sea video. De no ser así, NO ejecutar el fetch.
 
-    const form = document.querySelector('form');
-    const formData = new FormData(form);
+    const mainForm = document.getElementById('main-form');
+    const loader = document.getElementById('loader');
+
+    mainForm.classList.add('hidden');
+    loader.classList.add('upload-loader');
+
+    const formData = new FormData();
     formData.append('file', file);
     fetch('/', {
       method: 'POST',
@@ -97,6 +101,13 @@ if (Astro.request.method === "POST") {
   });
 
   muxUploader.addEventListener("success", () => {
-    //location.href = `/video-results/${id}`;
+    const analyzeLoader = document.getElementById('analyze-loader');
+    const loader = document.getElementById('loader');
+    
+    loader.classList.add('new-fade-in');
+    setTimeout(() => {
+      loader.classList.remove('upload-loader');
+      loader.classList.add('analyze-loader');
+    }, 1000)
   });
 </script>
