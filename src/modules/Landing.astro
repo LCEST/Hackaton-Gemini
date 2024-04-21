@@ -63,7 +63,7 @@ if (Astro.request.method === "POST") {
 
 <style>
   mux-uploader-drop[active] {
-    @apply bg-blue-400 dark:bg-gray-700 transition-all duration-200
+    @apply bg-blue-400 dark:bg-gray-700 transition-all duration-200;
   }
 </style>
 
@@ -82,9 +82,12 @@ if (Astro.request.method === "POST") {
 
     const mainForm = document.getElementById('main-form');
     const loader = document.getElementById('loader');
+    const loaderText = document.getElementById('loader-text');
 
     mainForm.classList.add('hidden');
     loader.classList.add('upload-loader');
+    loaderText.classList.remove('hidden');
+    loaderText.classList.add('loader-text', 'text-md', 'dark:text-white', 'font-semibold');
 
     const formData = new FormData();
     formData.append('file', file);
@@ -103,9 +106,12 @@ if (Astro.request.method === "POST") {
   muxUploader.addEventListener("success", () => {
     const analyzeLoader = document.getElementById('analyze-loader');
     const loader = document.getElementById('loader');
+    const loaderText = document.getElementById('loader-text');
     
     loader.classList.add('new-fade-in');
+    loaderText.classList.add('new-fade-in');
     setTimeout(() => {
+      loaderText.innerHTML = 'Analyzing results...';
       loader.classList.remove('upload-loader');
       loader.classList.add('analyze-loader');
     }, 1000)

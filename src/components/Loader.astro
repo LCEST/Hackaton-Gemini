@@ -1,44 +1,27 @@
-<span id="loader"></span>
+<div class="flex flex-col items-center min-h-fit loader-text">
+  <span id="loader" class="mb-8"></span>
+  <p id="loader-text" class="hidden">Processing video...</p>
+</div>
 
 <style>
   .upload-loader {
-    width: 175px;
-    height: 80px;
-    background-image: radial-gradient(circle 25px at 25px 25px, #FFF 100%, transparent 0), radial-gradient(circle 50px at 50px 50px, #FFF 100%, transparent 0), radial-gradient(circle 25px at 25px 25px, #FFF 100%, transparent 0), linear-gradient(#FFF 50px, transparent 0);
-    background-size: 50px 50px, 100px 76px, 50px 50px, 120px 40px;
-    background-position: 0px 30px, 37px 0px, 122px 30px, 25px 40px;
-    background-repeat: no-repeat;
     position: relative;
-    box-sizing: border-box;
+    width:  48px;
+    height: 48px;
+    background: #0085de;
+    transform: rotateX(65deg) rotate(45deg);
+    color: #fff;
+    animation: layers1 1s linear infinite alternate;
+  }
+  .upload-loader:after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.7);
+    animation: layerTr 1s linear infinite alternate;
+  }
+  .loader-text {
     animation: fadeIn 2s ease-in-out;
-  }
-  .upload-loader::before {
-    content: '';  
-    left: 60px;
-    bottom: 18px;
-    position: absolute;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: #FF3D00;
-    background-image: radial-gradient(circle 8px at 18px 18px, #FFF 100%, transparent 0), radial-gradient(circle 4px at 18px 0px, #FFF 100%, transparent 0), radial-gradient(circle 4px at 0px 18px, #FFF 100%, transparent 0), radial-gradient(circle 4px at 36px 18px, #FFF 100%, transparent 0), radial-gradient(circle 4px at 18px 36px, #FFF 100%, transparent 0), radial-gradient(circle 4px at 30px 5px, #FFF 100%, transparent 0), radial-gradient(circle 4px at 30px 5px, #FFF 100%, transparent 0), radial-gradient(circle 4px at 30px 30px, #FFF 100%, transparent 0), radial-gradient(circle 4px at 5px 30px, #FFF 100%, transparent 0), radial-gradient(circle 4px at 5px 5px, #FFF 100%, transparent 0);
-    background-repeat: no-repeat;
-    box-sizing: border-box;
-    animation: rotationBack 3s linear infinite;
-  }
-  .upload-loader::after {
-    content: '';  
-    left: 94px;
-    bottom: 15px;
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background-color: #FF3D00;
-    background-image: radial-gradient(circle 5px at 12px 12px, #FFF 100%, transparent 0), radial-gradient(circle 2.5px at 12px 0px, #FFF 100%, transparent 0), radial-gradient(circle 2.5px at 0px 12px, #FFF 100%, transparent 0), radial-gradient(circle 2.5px at 24px 12px, #FFF 100%, transparent 0), radial-gradient(circle 2.5px at 12px 24px, #FFF 100%, transparent 0), radial-gradient(circle 2.5px at 20px 3px, #FFF 100%, transparent 0), radial-gradient(circle 2.5px at 20px 3px, #FFF 100%, transparent 0), radial-gradient(circle 2.5px at 20px 20px, #FFF 100%, transparent 0), radial-gradient(circle 2.5px at 3px 20px, #FFF 100%, transparent 0), radial-gradient(circle 2.5px at 3px 3px, #FFF 100%, transparent 0);
-    background-repeat: no-repeat;
-    box-sizing: border-box;
-    animation: rotationBack 4s linear infinite reverse;
   }
   .analyze-loader {
     position: relative;
@@ -55,8 +38,8 @@
     left: 50%;
     top: 0;
     background-image:
-    radial-gradient(ellipse at center, #0000 24%,#de3500 25%,#de3500 64%,#0000 65%),
-    linear-gradient(to bottom, #0000 34%,#de3500 35%);
+    radial-gradient(ellipse at center, #0000 24%,#0085de,#0085de 64%,#0000 65%),
+    linear-gradient(to bottom, #0000 34%,#0085de 35%);
     background-size: 12px 12px , 100% auto;
     background-repeat: no-repeat;
     background-position: center top;
@@ -71,7 +54,7 @@
     transform: translateX(-50%);
     width: 66%;
     height: 60%;
-    background: linear-gradient(to bottom, #f79577 30%, #0000 31%);
+    background: linear-gradient(to bottom, #77b9f7 30%, #0000 31%);
     background-size: 100% 16px;
     animation: writeDown 2s ease-out infinite;
  }
@@ -80,6 +63,9 @@
     animation-duration: 1s, 2s;
     animation-delay: 0s, 3s;
  }
+ .fadeIn {
+  animation: fadeIn 2s forwards;
+ }
 
  @keyframes writeDown {
     0% { height: 0%; opacity: 0;}
@@ -87,15 +73,6 @@
     80% { height: 65%; opacity: 1;}
     100% { height: 65%; opacity: 0;}
  }
-
-  @keyframes rotationBack {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(-360deg);
-    }
-  }
 
   @keyframes fadeIn {
     0% {
@@ -110,13 +87,22 @@
 
   @keyframes fadeOut {
     0% {
-      transform: translateY(0%);
       opacity: 1;
     }
     100% {
       opacity: 0;
-      transform: translateY(-10%);
     }
 }
+
+  @keyframes layers1 {
+    0% { box-shadow: 0px 0px 0 0px  }
+   90% , 100% { box-shadow: 20px 20px 0 -4px  }
+  }
+  @keyframes layerTr {
+    0% { transform:  translate(0, 0) scale(1) }
+    100% {  transform: translate(-25px, -25px) scale(1) }
+  }
+      
+
 
 </style>
