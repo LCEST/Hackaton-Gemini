@@ -10,7 +10,7 @@ export default defineConfig({
 	site: process.env.CI
 		? 'https://antinunai.netlify.app'
 		: `http://localhost:${DEV_PORT}`,
-	base: process.env.CI ? '/flowbite-astro-admin-dashboard' : undefined,
+	base: process.env.CI ? '/' : undefined,
 	output: 'server',
 	adapter: netlify(),
 	trailingSlash: 'always',
