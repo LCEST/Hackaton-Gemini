@@ -1,10 +1,11 @@
 ---
 import '@mux/mux-uploader';
 import { postUpload } from '../services/mux-service';
+import { url } from '../lib/data.js';
 import Loader from '../components/Loader.astro';
 
 const uploadRes = await postUpload();
-const { url, id } = uploadRes.data;
+const { url: uploadUrl, id } = uploadRes.data;
 ---
 
 <div class=" min-h-screen pt-8 flex flex-col items-center">
@@ -59,9 +60,9 @@ const { url, id } = uploadRes.data;
 
 <script src="https://cdn.jsdelivr.net/npm/@mux/mux-uploader@1.0.0-beta.6"></script>
 
-<script define:vars={{ url, id }}>
+<script define:vars={{ uploadUrl, id, url }}>
   const muxUploader = document.querySelector('mux-uploader');
-  muxUploader.endpoint = url;
+  muxUploader.endpoint = uploadUrl;
 
   // TODO: Event listener 'upload-error'. ¿Qué vamos a hacer cuando no se pueda subir el video a MUX?
   // Mostrar pantalla de error y pedirle al usuario que vuelva a intentar.
@@ -82,13 +83,13 @@ const { url, id } = uploadRes.data;
     const formData = new FormData();
     formData.append('file', file);
 
-    const res = await fetch('http://localhost:2121/api/gemini-data.json', {
+    const res = await fetch(`${url}/api/gemini-data.json`, {
       method: 'POST',
       body: formData,
     });
     const geminiResponse = await res.json();
     localStorage.setItem(id, geminiResponse);
-    location.href = `video-results/${id}`
+    location.href = `${url}/video-results/${id}`
   });
 
   muxUploader.addEventListener("success", () => {
