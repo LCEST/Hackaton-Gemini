@@ -85,7 +85,7 @@ import { API_URL } from "../app/constants";
     const formData = new FormData();
     formData.append('file', file);
 
-    const res = await fetch(`${API_URL}/gemini-data.json`, {
+    const res = await fetch(`${API_URL}gemini-data.json`, {
       method: 'POST',
       body: formData,
     });
