@@ -64,8 +64,10 @@ async function callGeminiAPI (base64File: string, mimeType: string): Promise<Gem
   const generativeVisionModel = vertexAI.preview.getGenerativeModel({ model: MODEL });
 
   // Construct the request with the user prompt
+  const sport = "weightlifting";
+  const exercise = "front squat";
   const textPart = {
-    text: `Act as a top global coach in the sport of weightlifting. Provide observations and advice, and recommend exercises to improve the front squat exercise. Also, provide an overall rating of the exercise. Present your comments in the following format (video start time, video end time):Rules:
+    text: `Act as a top global coach in the sport of ${sport}. Provide observations and advice, and recommend exercises to improve the ${exercise} exercise. Also, provide an overall rating of the exercise. Present your comments in the following format (video start time, video end time):Rules:
     You must be as precise as possible in evaluating the exercise and the exact times so that your clients continue to trust you and you do not go bankrupt due to your failures.
     You must respond in JSON format under this structure:
     {
