@@ -65,18 +65,23 @@ async function callGeminiAPI (base64File: string, mimeType: string): Promise<Gem
 
   // Construct the request with the user prompt
   const sport = "weightlifting";
-  const exercise = "front squat";
+  const exercise = "dead lift";
   const textPart = {
-    text: `Act as a top global coach in the sport of ${sport}. Provide observations and advice, and recommend exercises to improve the ${exercise} exercise. Also, provide an overall rating of the exercise. Present your comments in the following format (video start time, video end time):Rules:
-    You must be as precise as possible in evaluating the exercise and the exact times so that your clients continue to trust you and you do not go bankrupt due to your failures.
+    text: `Act as a top global coach in the sport of ${sport}. Provide observations and advice, and recommend exercises to improve the ${exercise} exercise. Also, provide an overall rating of the exercise. 
+    Rubric:
+    Detailed Evaluation
+    Posture and Alignment
+    Control and Stability
+    Range of Motion
+    Technique and Accuracy
+    
+    
     You must respond in JSON format under this structure:
     {
         "observations": [
             {
                 "id": "int",
                 "title": "string",
-                "timeStart": "time",
-                "timeEnd": "time",
                 "comment": "string",
                 "score": "int 1-10",
                 "isPositive": "bool"

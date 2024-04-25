@@ -1,8 +1,6 @@
 export interface IObservation {
   id: number;
   title: string;
-  timeStart: string;
-  timeEnd: string;
   comment: string;
   score: number;
   isPositive: boolean;

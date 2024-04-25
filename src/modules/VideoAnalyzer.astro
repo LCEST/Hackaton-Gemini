@@ -5,7 +5,6 @@ import ObservationList from "../components/ObservationList.astro"
 import RecommendedExercises from "../components/RecommendedExercises.astro";
 import Score from "../components/Score.astro"
 import Confettis from '../components/ConfettiLauncher.astro';
-import { formatCuePoints } from "../services/cuePoints";
 import type { GeminiResponse } from "../types/endpointTypes";
 import { API_URL } from "../app/constants";
 
@@ -13,7 +12,6 @@ const geminiData = await fetch(`${API_URL}gemini-data.json`);
 const parsedData = await geminiData.json() as GeminiResponse;
 
 const { observations, rating, advices, recommended_exercises } = parsedData;
-const formattedCuePoints = formatCuePoints(observations);
 const { playbackId } = Astro.props;
 ---
 { rating.score === 10 && <Confettis /> }
@@ -23,7 +21,7 @@ const { playbackId } = Astro.props;
 			<div
 				class="flex p-0 sm:p-6 md:col-span-2 rounded-lg shadow-sm border bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800"
 			>
-				<MuxVideo cuePoints={formattedCuePoints} playbackId={playbackId} />
+				<MuxVideo  playbackId={playbackId} />
 			</div>
 			<!-- Observations -->
 			<div

@@ -1,11 +1,9 @@
 ---
-import type { ICuePoint } from "../types/cuePoint";
 interface Props {
-  cuePoints: ICuePoint[];
   playbackId: string|null|undefined;
 }
 
-const { cuePoints, playbackId } = Astro.props;
+const {playbackId } = Astro.props;
 ---
 
 <mux-player
@@ -20,38 +18,20 @@ const { cuePoints, playbackId } = Astro.props;
 
 <script src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
 
-<script define:vars={{ cuePoints }}>
+<script>
 const muxPlayerEl = document.querySelector('mux-player');
 let allObservations = [];
 let activeCuePoint;
 
 function addCuePointsToElement() {
-  muxPlayerEl.addCuePoints(cuePoints);
   allObservations = cuePoints.map(({value}) => value.reduce((acc, curr) => [...acc, curr.id], []));
   allObservations = allObservations.flat(1);
 }
 
-function setActiveObservations() {
-  activeCuePoint = muxPlayerEl.activeCuePoint;
-  const activeObservations = activeCuePoint.value.map((val) => val.id); // [observation-2, observation-3]
-  activeObservations.forEach((obs) => document.getElementById(obs).classList.add('bg-blue-100', 'dark:bg-slate-900', '!scale-100'));
-}
-
-function scrollToElement() {
-  const observationDiv = document.getElementById('observations-div');
-  const activeObservationId = activeCuePoint.value[0].id;
-  const activeEl = document.getElementById(activeObservationId);
-  observationDiv.scrollTo({
-    top: activeEl.offsetTop - observationDiv.offsetTop,
-    behavior: 'smooth',
-  });
-}
 
 const resetAllObservations = () => allObservations.forEach((obs) => document.getElementById(obs).classList.remove('bg-blue-100', 'dark:bg-slate-900', '!scale-100'));
 
-muxPlayerEl.addEventListener('cuepointchange', resetAllObservations);
-muxPlayerEl.addEventListener('cuepointchange', setActiveObservations);
-muxPlayerEl.addEventListener('cuepointchange', scrollToElement);
+
 
 if (muxPlayerEl.duration) {
   addCuePointsToElement();

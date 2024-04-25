@@ -1,7 +1,7 @@
 ---
 import type { IObservation } from "../types/endpointTypes";
 
-const { id, title, timeStart, timeEnd, comment, isPositive } = Astro.props as IObservation;
+const { id, title, score ,comment, isPositive } = Astro.props as IObservation;
 ---
 
 <li class="py-3" id={String(id)}>
@@ -19,18 +19,14 @@ const { id, title, timeStart, timeEnd, comment, isPositive } = Astro.props as IO
         "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300": !isPositive
       }
     ]}>
-      {timeStart} - {timeEnd}
+      {score}/10
     </p>
   </div>
   <p class="scale-95 flex-1 text-md px-2 text-gray-500">{comment}</p>
 </li>
 
-<script define:vars={{ id, timeStart }}>
+<script define:vars={{ id}}>
   const muxPlayerEl = document.querySelector('mux-player');
   document.getElementById(`observation-${id}`).addEventListener("click", setVideoTime);
 
-  function setVideoTime() {
-    const start = +timeStart.slice(3);
-    muxPlayerEl.currentTime = start;
-  }
 </script>
