@@ -64,10 +64,8 @@ async function callGeminiAPI (base64File: string, mimeType: string): Promise<Gem
   const generativeVisionModel = vertexAI.preview.getGenerativeModel({ model: MODEL });
 
   // Construct the request with the user prompt
-  const sport = "weightlifting";
-  const exercise = "dead lift";
   const textPart = {
-    text: `Act as a top global coach in the sport of ${sport}. Provide observations and advice, and recommend exercises to improve the ${exercise} exercise. Also, provide an overall rating of the exercise. 
+    text: `Act as a top global coach. Provide observations and advice, and recommend exercises to improve the video exercise. Also, provide an overall rating of the exercise. 
     Rubric:
     Detailed Evaluation
     Posture and Alignment
